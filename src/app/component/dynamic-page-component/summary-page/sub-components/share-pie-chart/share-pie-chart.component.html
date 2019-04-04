@@ -1,0 +1,29 @@
+<inner-loader [options]="options.showPodLoader"></inner-loader>
+<no-data-found [options]="options.showPODNoDataFound"></no-data-found>
+<div [hidden]="options.showPodLoader.showInnerLoader == true || options.showPODNoDataFound.showNoDataFound == true || options.ContextOptions.isGrid == true" class="chartContainer">
+    <kendo-chart class="kendochartClass {{options.shareChartGridClass}}" style="height: 100%;" #sharechartObj="kendoChart" *ngIf="shareChart != undefined"
+        [chartArea]="shareChart.chartArea"
+        [legend]="shareChart.legend"
+        [seriesDefaults]="shareChart.seriesDefaults"
+        [panes]="shareChart.panes"
+        [valueAxis]="shareChart.valueAxis"
+        [categoryAxis]="shareChart.categoryAxis"
+        [tooltip]="shareChart.tooltip">
+        <kendo-chart-series>
+            <kendo-chart-series-item [data]="ChartData" field="TYEAR" categoryField="ACCOUNT">
+                <kendo-chart-series-item-tooltip>
+                    <ng-template let-dataItem="dataItem">
+                        <div style="text-align: center;">
+                            <div class='chartTooltipTitle'>{{dataItem.ACCOUNT}}</div><div class='chartTooltipLine'>{{dataItem.TYEAR | nformatter:measureDataDecimalPlaces}} {{chartunit}} Sales</div><div class='chartTooltipLine'>{{dataItem.TYEAR | numberFormat: totalValChart}}% Share</div>
+                        </div>
+                    </ng-template>
+                </kendo-chart-series-item-tooltip>
+            </kendo-chart-series-item>
+        </kendo-chart-series>
+    </kendo-chart>
+    <app-context-menu *ngIf="shareChart != undefined" [contextOptions]="options.ContextOptions" (menuSelect)="onContextMenuSelect($event)"></app-context-menu>
+</div>
+<ult-grid [hidden]="options.showPodLoader.showInnerLoader == true || options.showPODNoDataFound.showNoDataFound == true || options.ContextOptions.isGrid == false" [options]="options.shareGrid" class="shareGridClass responsive-container ag-fresh"></ult-grid>
+<!-- <div context-menu options="options.ContextOptions" gridcallback="fnSetShareGrid()" chartcallback="fnSetShareChart()" showhidecallback="fnSetShowHideLabelShareChart()" changevisiblettemscallback="fnSetVisibleItems()" ></div> -->
+
+<!--input class="getSharePageName hide" value="{{options.pageName}}"-->

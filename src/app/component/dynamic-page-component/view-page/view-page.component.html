@@ -1,0 +1,40 @@
+<div id="page-{{pageID}}">
+	<section id="widget-grid-{{pageUniqueKey}}" class="{{pageUniqueKey}}_ViewPage" >  
+	    <div class="row" id="{{pageUniqueKey}}SelectionFrame">
+	        <div class="col-sm-12 col-md-12 col-lg-12">
+	            <!-- selection row start -->
+	            <div class="measureBoxs measurePositionTop">
+	                <time-selection #timeselectionCall (selectionDataEvent)="setSelectionData();" [hidden]="!showTimeSelection"></time-selection>
+	                <product-selection #productselectionCall (selectionDataEvent)="setSelectionData();" [hidden]="!showProductFilter"></product-selection>
+	                <market-selection  #marketselectionCall  (selectionDataEvent)="setSelectionData();" [hidden]="!showMarketFilter"></market-selection>
+	                <measure-selection #measureselectionCall  (selectionDataEvent)="setSelectionData();" [hidden]="!showMeasureSelection"></measure-selection>
+	                <div class="measureBox measureBox6">
+	                    <div class="measureBox-title marginBottom">
+	                        Hide Private Label
+	                    </div>
+	                    <div class="measureBox-content">
+	                        <input type="checkbox" [checked]="isCheckedPrivateLabel != undefined ? isCheckedPrivateLabel : true" [(ngModel)]="hidePrivateLabel" (change)="changeHidePrivateLabel()" />
+	                    </div>
+	                </div>
+	            </div>
+	            <!-- selection row end -->
+	        </div>
+	    </div>
+
+	    <div class="row podRowOne">
+	        <article class=" col-md-12">
+	            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0-{{pageUniqueKey}}" data-widget-editbutton="false" style="margin: 0px; height: 100%">
+	                <header>
+	                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+	                    <h2>PRODUCT VIEW</h2>
+	                </header>
+	                <div class="podContainer">
+	                    <inner-loader class="loaderHelper" [options]="gridLoaderOption"></inner-loader>
+	                    <ult-grid [hidden]="gridLoaderOption.showInnerLoader||gridLoaderOption.customError!=''" [options]="gridData" class="{{pageUniqueKey}}_ViewGrid  ag-fresh"></ult-grid>
+	                </div>
+	            </div>
+	        </article>
+	    </div>
+
+	</section>
+</div>

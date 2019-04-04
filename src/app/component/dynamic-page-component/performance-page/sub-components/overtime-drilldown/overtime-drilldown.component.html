@@ -1,0 +1,150 @@
+<div class='customChartSelectionWindow' *ngIf="customChartSelectionWindowVisible" id="{{options.customChartOptionsID}}" style="z-index: 9;">
+    <div class="blackOverlay">&nbsp;</div>
+    <kendo-window title="Custom Chart Options" [(width)]="drillDownModalWidth" [resizable]="false" (close)="windowclose()">
+        <kendo-tabstrip>
+            <kendo-tabstrip-tab [title]="'Items'" [selected]="options.activeTabName == 'drillDown'">
+                <ng-template kendoTabContent>
+                    <div style="width:79%;float: left; border-right: 1px solid #ddd;">
+                        <div class="SelectionTextRow smart-form">
+                            Show top <label class="input" style=" display: inline;"><input type='number' min="1" maxlength="{{options.totalLength}}" (change)="calculateLength(options.showTopCnt);" [(ngModel)]="options.showTopCnt" only-num class="input-sm" style="width:120px; display: inline;"/></label> Items
+                        </div>
+                        <div class="SelectionTextRow">
+                            <button name="lengthTen" (click)="calculateLength(10)">Top 10</button>
+                            <button name="lengthTwenty"  (click)="calculateLength(20)">Top 20</button>
+                            <button name="lengthFull"  (click)="calculateLength('full')">All</button>
+                        </div>
+                        <div class="SelectionTextRow">
+                            <input type='checkbox' [(ngModel)]='options.allOthers' /> <span> Show "All Other" </span>
+                            <input type='checkbox' [(ngModel)]='options.fitPageWidth' /> <span> Fit to page width </span>
+                        </div>
+                    </div>
+                    <div style="width:20%;float: left;">
+                        <div class="SelectionTextRow">
+                            <p>Total Items: {{options.totalLength}}</p>
+                            <p style="color:red;">{{options.showTopCntErrorMsg}}</p>
+                        </div>
+                    </div>
+                </ng-template>
+            </kendo-tabstrip-tab>
+            <kendo-tabstrip-tab [title]="'Formatting'" [selected]="options.activeTabName != 'drillDown'">
+                <ng-template kendoTabContent>
+                    <div>
+                        <div class="SelectionTextRow smart-form">
+                            Font Size:
+                            <div style="width:60px; display: inline-block">
+                                <label class="select" >
+                                    <select class="input-sm" id="chartFontSize" [(ngModel)]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].fontSize">
+                                        <option [ngValue]="8" [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].fontSize == 8">8</option>
+                                        <option [ngValue]="9" [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].fontSize == 9">9</option>
+                                        <option [ngValue]="10" [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].fontSize == 10">10</option>
+                                        <option [ngValue]="11" [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].fontSize == 11">11</option>
+                                        <option [ngValue]="12" [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].fontSize == 12">12</option>
+                                        <option [ngValue]="13" [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].fontSize == 13">13</option>
+                                        <option [ngValue]="14" [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].fontSize == 14">14</option>
+                                        <option [ngValue]="15" [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].fontSize == 15">15</option>
+                                    </select><i></i>
+                                </label>
+                            </div>
+                            Rotation:
+                            <div style="width:60px; display: inline-block">
+                                <label class="select">
+                                    <select class="input-sm" id="chartRotation" 
+                                    [(ngModel)]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].rotation">
+                                        <option [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].rotation == 0" [ngValue]="0">0</option>
+                                        <option [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].rotation == -45" [ngValue]="-45">-45</option>
+                                        <option [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].rotation == -60" [ngValue]="-60">-60</option>
+                                        <option [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].rotation == -90" [ngValue]="-90">-90</option>
+                                        <option [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].rotation == -120" [ngValue]="-120">-120</option>
+                                        <option [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].rotation == 45" [ngValue]="45">45</option>
+                                        <option [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].rotation == 60" [ngValue]="60">60</option>
+                                        <option [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].rotation == 90" [ngValue]="90">90</option>
+                                        <option [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].rotation == 120" [ngValue]="120">120</option>
+                                    </select><i></i>
+                                </label>
+                            </div>
+                            Legend:
+                            <div style="width:80px; display: inline-block">
+                                <label class="select" >
+                                    <select class="input-sm" id="legendAlign" [(ngModel)]="options.legendAlign">
+                                        <option [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].legendAlign == 'start'" value="start">Left</option>
+                                        <option [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].legendAlign == 'center'" value="center">Center</option>
+                                        <option [selected]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].legendAlign == 'end'" value="end">Right</option>
+                                    </select> <i></i>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="SelectionTextRow checkBoxSelection">
+                            <input type='checkbox' [(ngModel)]='options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].chartTextWrap' /> <span> Text Wrap</span>
+                        </div>  
+                    </div>
+                </ng-template>
+            </kendo-tabstrip-tab>
+            <kendo-tabstrip-tab [title]="'Chart Title'">
+                <ng-template kendoTabContent>
+                    <div style="width:94%; float: left; padding: 2%; border: none;">
+                        <div class="SelectionTextRow smart-form">       
+                                Chart Title based on selections: <input  type='checkbox' [(ngModel)]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].isVisibleSelectionToTitle" /> <span> Visible </span>
+                                <label class="input" style=" display: inline;"><input type='text' [(ngModel)]="options.selectionToTitle"  class="input-sm" style="display: inline;"/></label>
+                        </div>
+                        <div class="SelectionTextRow smart-form">        
+                                Chart Footer based on selections: <input  type='checkbox' [(ngModel)]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].isVisibleSelectionToFooterTitle" /> <span> Visible </span>
+                                <label class="input" style=" display: inline;"><input type='text' [(ngModel)]="options.selectionToFooterTitle"  class="input-sm" style="display: inline;"/></label>
+                        </div>
+                    </div> 
+                </ng-template>
+            </kendo-tabstrip-tab>
+        </kendo-tabstrip>
+        <div class="SelectionTextRow">
+            <button (click)="customChartCalculation();windowclose();" 
+            name="timeSelectionOk">OK</button>
+            <button (click)="windowclose();" name="timeSelectionCancel">Cancel</button>
+        </div>
+    </kendo-window>
+</div>
+<div class="tab-content no-padding responsive-container OvertimeContainer">
+    <div style="position: absolute; z-index: 99; margin-top: -42px; right: 35px;">
+        <ul style="list-style: none;" class="tabMenu">
+            <li *ngFor="let tabConfig of options.tabsConfiguration | keys" class="tabClass {{options.tabsConfiguration[tabConfig].activeTabClass}}" id="{{options.tabsConfiguration[tabConfig].tabId}}" [hidden]="!options.tabsConfiguration[tabConfig].showTab">
+                <a data-toggle="tab" style="cursor:pointer;" title="{{options.tabsConfiguration[tabConfig].tabTitle}}" (click)="drilldownOvertimetabClickEvent(tabConfig);">{{options.tabsConfiguration[tabConfig].tabTitle}}</a>
+            </li>	
+        </ul>
+    </div>
+    <div class="chartContainer" [ngStyle]="{overflow:(options.notFitScreenWidth == 0 || options.notFitScreenWidth == undefined || options.drilldownOvertimeContextOptions.isGrid == true || options.drilldownOvertimeContextOptions.activeTab == 'two')?'hidden':'auto'}">
+
+        <div id="drillDownChartDiv" class="overtimeDrilldownChartContainer" style="height: 98%;" [hidden]="options.drilldownOvertimeContextOptions.isGrid == true">
+            <kendo-chart #drillDownChartObj="kendoChart" *ngIf="drilldownOvertimeChart != undefined" class="performanceChartContainer kendochartClass {{options.performanceChartGridClass}}" 
+            (render)="onChartRender($event)"
+            [legend]="drilldownOvertimeChart.legend"
+            [panes]="drilldownOvertimeChart.panes"
+	        [seriesDefaults]="drilldownOvertimeChart.seriesDefaults"
+	        [categoryAxis]="drilldownOvertimeChart.categoryAxis"
+            [valueAxis]="drilldownOvertimeChart.valueAxis"
+            [title]="drilldownOvertimeChart.title"
+            [tooltip]="drilldownOvertimeChart.tooltip"
+            >
+                <kendo-chart-series>
+        		  <kendo-chart-series-item *ngFor="let item of drilldownOvertimeChart.series" [data]="chartData" type="{{item.type}}" field="{{item.field}}" name="{{item.name}}" color="{{item.color}}" axis="{{item.axis}}" spacing="{{item.spacing}}" categoryField="ACCOUNT">
+                        <kendo-chart-series-item-labels [visible]="options.tabsConfiguration[options.chartTabMappings[options.activeTabName]].dataTips" *ngFor="let item of drilldownOvertimeChart.series" [content]="labelContent"></kendo-chart-series-item-labels>
+                        <kendo-chart-series-item-tooltip>
+                            <ng-template let-series="series" let-value="value" let-category="category">
+                                <div style="text-align: center;">
+                                    <div>{{series.name}}</div>
+                                    <div>{{category}}</div>
+                                    <div>
+                                        <span *ngIf="series.type == 'column'">{{ intl.formatNumber(value, 'n'+columnchartdecimalplaces) }}</span>
+                                        <span *ngIf="series.type == 'line'">{{ intl.formatNumber(value, 'n'+linechartdecimalplaces) }}</span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </kendo-chart-series-item-tooltip>
+                  </kendo-chart-series-item>
+                </kendo-chart-series>
+            </kendo-chart>
+            <app-context-menu *ngIf="drilldownOvertimeChart != undefined" [contextOptions]="options.drilldownOvertimeContextOptions" (menuSelect)="onContextMenuSelect($event)"></app-context-menu>
+        
+        </div>
+
+        <ult-grid style="height: 95%;" [hidden]="options.drilldownOvertimeContextOptions.isGrid == false" [options]="options.drilldownOvertimeGrid" class="performanceGridContainer responsive-container ag-fresh"></ult-grid>
+
+    </div>
+</div>

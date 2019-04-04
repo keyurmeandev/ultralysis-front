@@ -1,0 +1,60 @@
+/*
+ * Custom Layout for Ultralysis
+*/
+
+/* START ===================================================
+SET BACKGROUND OF HEADER, FOOTER, POD HEADER AND LEFT MENU*/
+.demo { display:none!important;}
+#header { background: #39b54a; height: 86px;}
+#left-panel { padding-top: 86px;}
+.bg-white { background: #fff!important;}
+/*.jarviswidget-color-blueDark > header { background: #472613;}*/
+/*#ribbon,.login-info { background: #000;}*/
+/*#left-panel { background: #472613;}*/
+/*.page-footer { background: #000;  z-index: 1000;}*/
+
+#logo { margin-top: 5px;}
+#logo img { height: 80px; width: auto;}
+
+/*SET BACKGROUND OF HEADER, FOOTER, POD HEADER AND LEFT MENU
+ END ======================================================*/
+
+.login-info img { border: none;}
+.client_logo { float: right; margin-top: 5px;}
+.client_logo img { height:30px; width: auto;}
+
+/* TABS*/
+.ui-tabs .ui-tabs-panel { border: none!important;}
+
+
+/* SET GRID PADDING */
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9{
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+
+
+/* START SELECTIN MODULE */
+
+.measureBoxs { width:100%; float: left; margin-bottom: 6px;}
+.measureBoxs .measureBox { float: left; border: 1px solid #efefef;}
+.measurePositionTop.measureBoxs .measureBox4 { width: 24%; padding: 0 1% 0 0;}
+.measurePositionTop.measureBoxs .measureBox5 { width: 19%; padding: 0 1% 0 0;}
+.measurePositionTop.measureBoxs .measureBox6 { width: 15%; padding: 0 1% 0 0;}
+.measurePositionLeft.measureBoxs .measureBox4 { width: 95%; padding: 0 0 10px 0;}
+.measurePositionLeft.measureBoxs .measureBox5 { width: 95%; padding: 0 0 10px 0;}
+.measurePositionLeft.measureBoxs .measureBox6 { width: 95%; padding: 0 0 10px 0;}
+.measureBoxs .measureBox-title { padding: 2px 4px; font-size: 11px; display: block; background: #303030; color: #eee; cursor: pointer; }
+.measureBoxs .measureBox-title:hover { color: #fff;}
+.measureBoxs .measureBox-title span { float: right;}
+.measureBoxs .measureBox-content { display: block; height: auto; max-height: 50px; overflow: auto; }
+.measureBoxs .measureBox-content p { margin: 0; padding: 1px 2px 0 2px; font-size: 10px; }
+.marginBottom { margin-bottom: 3px;}
+
+/*custom modal form product,market selection*/
+.modal-custom-body{ float: left;  padding: 1%; width: 98%;}
+.modal-custom-footer { float: left; width: 100%; padding: 20px 0; text-align: center;}
+.modal-custom-body .filterField { width: 96%; padding-left: 2%; padding-right: 2%; margin-bottom: 2px;}
+
+/* END SELECTIN MODULE */

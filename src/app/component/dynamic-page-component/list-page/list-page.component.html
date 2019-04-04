@@ -1,0 +1,70 @@
+<div id="page-{{pageID}}">
+<section id="widget-grid-{{pageUniqueKey}}" class="{{pageUniqueKey}}_ListPage ">    
+    <div class="row" id="{{pageUniqueKey}}SelectionFrame">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <!-- selection row start -->
+            <div class="measureBoxs measurePositionTop">
+
+                <div [hidden]="!showTimeSelection" class="measureBox measureBox6">
+                    <div class="measureBox-title">
+                        Time Selection
+                    </div>
+                    <select [(ngModel)]="selectedWeek" (change)="callFilterChange()" style="width:100%;">
+                        <option value="1">Last Week</option>
+                        <option value="4">Last 4 Weeks</option>
+                        <option value="12">Last 12 Weeks</option>
+                        <option value="52">Last 52 Weeks</option>
+                    </select>
+                </div>
+                <!-- <time-selection #timeselectionCall (selectionDataEvent)="setSelectionData('');" id="timeSelection" [hidden]="timeSelectionUnit == 'monthYear' && showTimeSelection == false && isSif == true"></time-selection> -->
+                <product-selection #productselectionCall (selectionDataEvent)="setSelectionData('');"
+                    id="productSelection" isShowProductFilter="isShowProductFilter"></product-selection>
+                <market-selection #marketselectionCall  (selectionDataEvent)="setSelectionData('');" id="marketSelection"></market-selection>
+                <measure-selection #measureselectionCall  (selectionDataEvent)="setSelectionData('');" id="measureSelection"></measure-selection>
+            </div>
+            <!-- selection row end -->
+        </div>
+    </div>
+    <div [hidden]="!showStoreCount" class="row state-overview">
+        <div class="col-md-2 col-sm-4">
+            <section class="panel">
+                <div class="symbol blue">
+                    <i class="fa fa-tags"></i>
+                </div>
+                <div class="value">
+                    <h1>{{storeCount}}</h1>
+                    <p>{{tableName}}</p>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- ROW STARTS -->
+    <div class="row podRowOne ListPage " style="height:92%; min-height: 400px;">
+	
+        <article class="col-sm-12 col-md-12 col-lg-12 POD_ONE">
+
+                <div class="treeMapPod jarviswidget jarviswidget-color-blueDark" id="wid-id-0-rl-sku-list" data-widget-editbutton="false" >
+
+                    <header class="treeMapHead">
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{tableName}} List</h2>
+
+                        <!-- <div class="widget-toolbar" role="menu">
+                            <input type="image" src="/assets/img/icon_csv.png" ng-csv="downloadCsv" filename="export_file.csv" rel="tooltip" class="btn btn-sm hidden-mobile hidden-tablet  {{hideIsMobile}}" title="CSV Export">
+                        </div> -->
+                    </header>
+
+                    <div class="podContainer text-center responsive-container">
+                        <inner-loader [options]="listPageGridInnerLoader"></inner-loader>
+                        <no-data-found [options]="listPageGridInnerLoader"></no-data-found>
+                         <ult-grid [hidden]="listPageGridInnerLoader.showInnerLoader||listPageGridInnerLoader.customError!=''" [options]="skuFileGrid" class="{{pageUniqueKey}}_listPageGrid  ag-fresh"></ult-grid>
+                    </div>
+
+                </div>
+        </article>
+
+    </div>
+
+</section>
+
+</div>

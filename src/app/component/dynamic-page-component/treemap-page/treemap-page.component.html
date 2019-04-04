@@ -1,0 +1,91 @@
+<!-- widget grid -->
+<div id="page-{{pageID}}">
+<section id="widget-grid-{{pageUniqueKey}}" class="{{pageUniqueKey}}_TreeMapPage tree_map_page">
+    <div class="row" id="{{pageUniqueKey}}SelectionFrame">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <!-- selection row start -->
+            <div class="measureBoxs measurePositionTop">
+
+            	<time-selection #timeselectionCall (selectionDataEvent)="setSelectionData('');" id="timeSelection" [hidden]="!showTimeSelection"></time-selection>
+                <product-selection #productselectionCall (selectionDataEvent)="setSelectionData('');"
+                id="productSelection" [hidden]="!showProductFilter"></product-selection>
+                <market-selection #marketselectionCall  (selectionDataEvent)="setSelectionData('');" id="marketSelection" [hidden]="!showMarketFilter"></market-selection>
+                <measure-selection #measureselectionCall  (selectionDataEvent)="setSelectionData('');" id="measureSelection" [hidden]="!showMeasureSelection"></measure-selection>
+                
+                <div class="measureBox measureBox6">
+                    <div class="measureBox-title marginBottom">
+                        Hide Private Label
+                    </div>
+                    <div class="measureBox-content">
+                        <input type="checkbox" [checked]="isCheckedPrivateLabel != undefined ? isCheckedPrivateLabel : true" [(ngModel)]="hidePrivateLabel" (change)="changeHidePrivateLabel()" />
+                    </div>
+                </div>
+
+                <div [hidden]="!showPositiveScale" class="measureBox measureBox6" style="width: 10%">
+                    <div class="measureBox-title marginBottom">
+                        Positive Scale
+                    </div>
+                    <div class="measureBox-content">
+                        <select [(ngModel)]="positiveMaxVal" class="col-sm-12" (change)="redrawChart()">
+                        	<option *ngFor="let itm of positiveValList" [ngValue]="itm.value">{{itm.label}}</option>
+                        </select><i></i>
+                    </div>
+                </div>
+
+                <div [hidden]="!showNegativeScale" class="measureBox measureBox6" style="width: 10%">
+                    <div class="measureBox-title marginBottom">
+                        Negative Scale
+                    </div>
+                    <div class="measureBox-content">
+                        <select [(ngModel)]="negativeMaxVal" class="col-sm-12" (change)="redrawChart()">
+                        	<option *ngFor="let itm of negativeValList" [ngValue]="itm.value">{{itm.label}}</option>
+                        </select><i></i>
+                    </div>
+                </div>
+            </div>
+            <!-- selection row end -->
+        </div>
+    </div>
+
+    <!-- ROW STARTS -->
+    <div class="row podRowOne">
+
+        <!-- POD STARTS -->
+        <article class="col-sm-12 col-md-12 col-lg-12 POD_TWO">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0-{{pageUniqueKey}}" data-widget-editbutton="false" style="margin: 0px;height:460px;">
+
+                <header class="treeMapHead">
+                    <div class="widget-toolbar" role="menu">
+                        <ul id="widget-tab-1-{{pageUniqueKey}}" class="nav nav-tabs pull-left">
+                            <li *ngFor="let tab of treeTabList;let i = index;" (click)="tabClickEvent(tab.data, i);" [ngClass]="currentIndex == i ? 'active' : ''">
+                                <a data-toggle="tab">
+                                	<i class="fa fa-arrow-circle-down"></i>
+                                	{{(tab.name).split("_").join(" ")}}
+                            	</a>
+                            </li>                          
+                        </ul>
+                    </div>
+                </header>
+
+                <div class="podContainer" id="treemap-container" style="height:100%;">
+                    <div class="responsive-container">
+                        <div class="widget-body no-padding responsive-container" >
+                            <div class="tab-content responsive-container">
+                                <div class="tab-pane fade in active responsive-container" id="TabOne">
+                                    <inner-loader [options]="options.showPodLoader"></inner-loader>
+                                    <div [hidden]="options.showPodLoader.showInnerLoader" class="treemapDivNode{{pageUniqueKey}} responsive-container"></div>
+                                    <app-context-menu [contextOptions]="treemapContextMenuOptions" (menuSelect)="onContextMenuSelect($event)"></app-context-menu>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- POD ENDS -->
+
+    </div>	
+
+</section>
+</div>

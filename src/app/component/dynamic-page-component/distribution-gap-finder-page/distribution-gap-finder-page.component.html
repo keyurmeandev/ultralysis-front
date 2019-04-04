@@ -1,0 +1,91 @@
+<div id="page-{{pageID}}">
+<section id="widget-grid-{{pageUniqueKey}}" class="{{pageUniqueKey}}_distributionGapFinder">
+    <jqxSplitter #splitContainer width="100%" [height]="pageHeight" [panels]="[{ size: '20%' }]" [orientation]="'vertical'" id="{{pageUniqueKey}}_splitContainer" class="splitter">
+        <div>
+            <div id="{{pageUniqueKey}}FilterContainer">
+                <div  class="measureBoxs measurePositionLeft">
+                    <div [hidden]="!showTimeSelection" class="measureBox measureBox6">
+                        <div class="measureBox-title">
+                            Time Selection
+                        </div>
+                        <select [(ngModel)]="selectedWeek" (change)="callFilterChange('')" style="width:100%;">
+                            <option value="1">Last Week</option>
+                            <option value="4">Last 4 Weeks</option>
+                            <option value="12">Last 12 Weeks</option>
+                            <option value="52">Last 52 Weeks</option>
+                        </select>
+                    </div>
+                    <!-- <time-selection #timeselectionCall (selectionDataEvent)="setSelectionData('');" id="timeSelection" [hidden]="timeSelectionUnit == 'days' && showTimeSelection == false && isSif == true"></time-selection> -->
+                    <product-selection #productselectionCall (selectionDataEvent)="setSelectionData('');"
+                    id="productSelection" isShowProductFilter="isShowProductFilter"></product-selection>
+                    <market-selection #marketselectionCall  (selectionDataEvent)="setSelectionData('');" id="marketSelection"></market-selection>
+                    <measure-selection #measureselectionCall  (selectionDataEvent)="setSelectionData('');" id="measureSelection"></measure-selection>
+
+                    <div [hidden]="!isShowPrivateLabel" class="measureBox measureBox6">
+                        <div class="measureBox-title marginBottom">
+                            Hide Private Label
+                        </div>
+                        <div class="measureBox-content">
+                            <input type="checkbox" [checked]="isCheckedPrivateLabel != undefined ? isCheckedPrivateLabel : true" [(ngModel)]="hidePrivateLabel" (change)="changeHidePrivateLabel()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div><!--split right container start-->
+            <!-- ROW STARTS -->
+            <div class="halfRow">
+                <!-- POD STARTS -->
+                <article class=" col-md-12">
+                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0-{{pageUniqueKey}}" data-widget-editbutton="false" style="margin: 0px; height: 100%">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>{{titleOfGrid}}</h2>
+                        </header>
+                        <div class="podContainer" >
+                            <inner-loader class="loaderHelper" [options]="topGridOption"></inner-loader>
+                            <ult-grid [hidden]="topGridOption.showInnerLoader&&topGridOption.customError!=''" [options]="topGrid" class="{{pageUniqueKey}}_gapFinderGrid responsive-container ag-fresh"></ult-grid>
+                        </div>
+                    </div>
+                </article>
+                <!-- POD ENDS -->
+
+            </div>	
+            <!-- ROW ENDS -->
+			<div class="clearb">&nbsp;</div>
+            <!-- ROW STARTS -->
+            <div class="halfRow">
+                <!-- POD STARTS -->
+                <article class=" col-md-12">
+                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1-{{pageUniqueKey}}" data-widget-editbutton="false" style="margin: 0px; height: 100%">
+                        <header>
+                            <div class="widget-toolbar" role="menu" style="float: left">
+                                <ul id="widget-tab-1-{{pageUniqueKey}}" class="nav nav-tabs pull-left">
+                                    <li (click)="tabClickEvent('notSelling');" [ngClass]="tabActiveClass.one" id="notSell-{{pageUniqueKey}}">
+                                        <a> <i class="fa fa-lg fa-arrow-circle-o-down"></i> <span class="hidden-mobile hidden-tablet"> Not Selling </span> </a>
+                                    </li>
+                                    <li (click)="tabClickEvent('selling');" [ngClass]="tabActiveClass.two" id="sell-{{pageUniqueKey}}">
+                                        <a> <i class="fa fa-lg fa-arrow-circle-o-down"></i> <span class="hidden-mobile hidden-tablet"> Selling </span> </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </header>
+                        <div class="podContainer" style="min-height: 250px;">
+                            <inner-loader class="loaderHelper" [options]="bottomGridOption"></inner-loader>
+                            <ult-grid [hidden]="bottomGridOption.showInnerLoader&&bottomGridOption.customError!=''" [options]="skuGridData" class="{{pageUniqueKey}}_bottomGrid responsive-container ag-fresh"></ult-grid>
+                        </div>
+                    </div>
+                </article>
+                <!-- POD ENDS -->            
+
+            </div>	
+            <!-- ROW ENDS -->
+
+        </div>
+        <!-- split right container end-->
+    </jqxSplitter>
+    <!-- </div> -->
+
+</section>
+
+</div>

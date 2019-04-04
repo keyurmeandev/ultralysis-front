@@ -1,0 +1,23 @@
+<!--*ngIf="show" -->
+<!-- <kendo-popup *ngIf="show" [offset]="offset">
+    <ul class="contextMenu">
+        <li *ngFor="let item of contextOptions.menuItems" [hidden]="item.isHidden==true" (click)="menuItemSelected(item)">
+        	{{item.menuText}}
+        	<kendo-menu [items]="items" [vertical]="true" style="display:inline-block;">
+        	</kendo-menu>
+        	<ul *ngIf="item.hasSubMenu" class="subContextMenu">
+		        <li *ngFor="let subitem of item.subMenuItems" (click)="subMenuItemSelected(item, subitem)">
+		        	{{subitem.menuText}}
+		        </li>
+		    </ul>
+        </li>
+    </ul>
+</kendo-popup> -->
+
+<kendo-popup *ngIf="show" [offset]="offset">
+	<kendo-menu [vertical]="true" [items]="contextOptions.menuItems" (select)="menuItemSelected($event)" class="contextMenu">
+        <ng-template kendoMenuItemTemplate let-item="item">
+            {{item.menuText}}
+        </ng-template>
+	</kendo-menu>
+</kendo-popup>

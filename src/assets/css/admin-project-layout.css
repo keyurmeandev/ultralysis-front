@@ -1,0 +1,327 @@
+/*
+ * Custom Layout for Ultralysis Admin Manager Projects
+*/
+/* Start Project Manager Css Merged From here */
+body{font-family:"Open Sans",Arial,Helvetica,sans-serif;}
+.arrowImg{float:left;}
+.widget-body.no-padding{margin:0;}
+.table{font-size: 11px;width: 100%;}
+.table>thead>tr>th{font-size:11px;}
+td{ position: relative; font-size: 11px;text-align: right;}
+.pod-heading { padding-bottom: 5px; margin-bottom: 10px; border-bottom: 1px solid #ddd;}
+.green { color: green;}
+.red { color: red;}
+th a.k-link{  font-size: 11px;}
+h3{  font-size:14px; margin:6px 0 0 20px; width:40%; float:left;}
+.btn2 {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #fafafa;
+    background-image: linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+    background-repeat: no-repeat;
+    border-color: #ccc #ccc #bbb;
+    border-image: none;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 0px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    color: #000000;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 18px;
+    padding:0;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+}
+
+.jarviswidget-color-blueDark .nav-tabs li:not(.active) a {
+    color: #000 !important;
+}
+.progressBar{
+    z-index:1; padding:0;height:20px;top:5px;
+}
+.imgprogressSpan{
+    z-index:10;float:right;position:absolute;right:11px
+}
+.text-right{
+    text-align: right;
+}
+
+.k-grid-header th.k-header, .k-filter-row th {   
+    text-overflow: inherit;
+    -moz-text-overflow: inherit;
+    -webkit-text-overflow: inherit;
+    white-space: inherit;
+    -moz-white-space: inherit;
+    -webkit-white-space: inherit;
+    text-align: center;
+    vertical-align: top;
+}
+a, a:focus, a:hover { text-decoration: none;}
+
+/*Boxs*/
+
+.ultpod { display: block; margin-bottom: 30px; width: 100%; float: left;}
+.ultpod-title { padding:6px 10px; margin-bottom: 10px; font-size: 14px;}
+
+.box { width: 100%; min-height: 100px; text-align: center; float: left;}
+.box-title {  display: block; padding: 5px; margin: 0 0 10px 0; width: 100%;}
+.box-bottom {  display: block; padding: 5px; margin: 10px 0 0px 0; width: 100%;}
+.green-bg { background: #82b56c; color: #fff;}
+.green-bg .box-title { background: #669651;}
+.green-bg .box-bottom { background: #578145;}
+.blue-bg { background: #68c4f4; color: #fff;}
+.blue-bg .box-title { background: #43ace2;}
+.blue-bg .box-bottom { background: #2fa2df;}
+.orange-bg { background: #f39405; color: #fff;}
+.orange-bg .box-title { background: #d28005;}
+.orange-bg .box-bottom { background: #cd7d05;}
+.yellow-bg { background: #fec669; color: #fff;}
+.yellow-bg .box-title { background: #f1a82f;}
+.violet-bg { background: #b32cb3; color: #fff;}
+.violet-bg .box-title { background: #800a80;}
+.red-bg { background: #c60000; color: #fff;}
+.red-bg .box-title { background: #b30000;}
+.red-bg .box-bottom { background: #9f0000;}
+.gray-bg { background: #555; color: #fff;}
+.gray-bg .box-title { background: #333;}
+
+
+/*end box*/
+.customBox5 { width: 19%; float: left; margin:0 .5%;}
+.pod2chart{
+    height: 326px;
+}
+#wid-id-Inner { height: 90% !important;}
+.wid-id-Inner { height: 90% !important;}
+.heightAuto {height: 100% !important;}
+.chartPieline{
+        height: 100% !important;
+}
+.tooltip-inner , .tooltip-arrow{
+    /*display: none !important;*/
+}
+.lineeChart div:first-child{
+    width: 1050px !important;
+}
+.colmnChart  div:first-child{
+    width: 1050px !important;
+}
+.k-grid{
+    width: 100%;
+}
+.rangeeffiencyfirst{
+    float: left;
+    text-align: left;
+    width: 40%;
+}
+.rangeeffiencysecond{
+    float: left;
+    text-align: left;
+    width: 25%;
+}
+.k-label{
+    display: none;
+}
+ol.breadcrumb li{
+    font-size: 11px;
+}
+
+/* Menu Customize */
+.menu-on-top .menu-item-parent { max-width: 200px!important;}
+.menu-on-top aside#left-panel nav > ul > li > a { height: 36px !important;font-size:11px; }
+.menu-on-top aside#left-panel nav > ul > li > a > i { display: none!important;}
+.menu-on-top nav > ul > li > a:after { top: 60%!important;}
+.menu-on-top #main { margin-top: 50px!important;}
+.menu-on-top li.active > a { font-weight: normal!important;}
+input[type=checkbox]{width:18px;height:18px;float:right;}
+.primary-market {
+	background: #FFFACE !important;
+	color:#000;
+}
+.secondary-market {
+	background: #CED3FF !important;
+}
+.k-grid-header th.k-header{font-size:11px;line-height:18px;color:#2e2e2e;}
+.msg{font-size:14px;color:green;font-weight:bold;text-align:center;padding-bottom:10px;}
+.error{font-size:14px;color:red;font-weight:bold;text-align:center;padding-bottom:10px;}
+.error_login{color:red;width:100%;float:left;padding-left:102px;}
+#contentLoging{margin:0 auto;width:35%;padding-top:15px;}
+
+.activeOuterBtn { border: 1px solid #4CD563; background: #4CD563; }
+.activeInnerBtn { float: right; }
+.inactiveOuterBtn { border: 1px solid #E0E0E0; background: #E8E8E8; }
+.inactiveInnerBtn { float: left; }
+.statusOuterBtn { width: 34px; height: 20px; border-radius: 10px; }
+.statusInnerBtn { width: 58%; background: white; height: 100%; border-radius: 10px; border: none; cursor: pointer; }
+
+.dropAreaDiv { background:#FFF;position:fixed;height:60px;width:66% }
+.dropArea { background:#FFFACE;margin:3px 3px 0px 3px }
+.projectConfigurationMenu  li.active > a{font-weight: 700 !important;}
+
+.customerConfig .form-control { padding: 0}
+.infoIconLabel { float: left; padding: 5px 0px 0px 10px; margin-bottom: 0px; }
+.infoConfig { width: 80%; float: left; }
+
+.fancyCheckbox input[type=checkbox]{display:none;}
+.fancyCheckbox input[type=checkbox]+label{cursor:pointer;font-size:1em}
+[id^=checkbox-10-]+label{background-color:#fafbfa;padding:9px;border-radius:50px;display:inline-block;position:relative;margin-right:30px;-webkit-transition:all .1s ease-in;transition:all .1s ease-in;width:46px;height:20px}
+[id^=checkbox-10-]+label:after{content:' ';position:absolute;top:0;-webkit-transition:box-shadow .1s ease-in;transition:box-shadow .1s ease-in;left:0;width:100%;height:100%;border-radius:100px;box-shadow:inset 0 0 0 0 #eee,0 0 1px rgba(0,0,0,.4)}
+[id^=checkbox-10-]+label:before{content:' ';position:absolute;background:#fff;top:0px;left:0px;z-index:999999;width:25px;-webkit-transition:all .1s ease-in;transition:all .1s ease-in;height:20px;border-radius:100px;box-shadow:0 3px 1px rgba(0,0,0,.05),0 0 1px rgba(0,0,0,.3)}
+[id^=checkbox-10-]:active+label:after{box-shadow:inset 0 0 0 20px #eee,0 0 1px #eee}
+[id^=checkbox-10-]:active+label:before{width:37px}
+[id^=checkbox-10-]:checked:active+label:before{width:37px;left:20px}
+[id^=checkbox-10-]+label:active{box-shadow:0 1px 2px rgba(0,0,0,.05),inset 0 1px 3px rgba(0,0,0,.1)}
+[id^=checkbox-10-]:checked+label:before{content:' ';position:absolute;left:22px;border-radius:100px}
+[id^=checkbox-10-]:checked+label:after{content:' ';font-size:1.5em;position:absolute;background:#4cda60;box-shadow:0 0 1px #4cda60}
+.dataManagerPopup li div { float: left;}
+.popupLi {width: 500px; list-style:none; margin-bottom:10px;}
+.popupLiLabel {width: 100px;padding: 0px;}
+.popupSubmitLi {list-style:none; margin-top: 10px;}
+.tablesInput {margin-right:5px!important; margin-top:1px!important; float: left!important;}
+.marginTop5 {margin-top:5px;}
+/* End Project Manager Css Merged From Here */
+
+/* Start Admin Manager Css Merged From Here */
+
+.btn-sm{padding:3px 10px;}
+.popUpBoxs li { float: left;padding-bottom:6px;}
+.input_box { padding: 0 4px;}
+.error_field { border: 1px solid #953b39;}
+.error_label { color: #953b39; float: left; margin: 2px 0 0 0;text-align:left;font-size:13px;}
+.clearb {clear: both;}
+#changePasswordModal .error_label {margin : 0; width: 100%;}
+.SFPcontainer { width:100%;}
+.SFPcontainer .left_box { width:45%; float: left;}
+.SFPcontainer .left_box select { width:100%; height:225px;}
+.SFPcontainer .mid_box { width:10%; float: left; padding-top:10%; text-align: center;}
+.SFPcontainer .right_box { width:45%; float: right;}
+.SFPcontainer .right_box select { width:100%; height:250px;}  
+.leftMeasureGroup { float: left; width:100%; border:1px solid #999; margin-bottom: 2px; padding: 2px 5px;}
+.modal-header{font-size:18px;}
+th, th a.k-link{font-size: 11px;}
+.k-grid, .k-listview, .jarviswidget > div{border:0px !important;}
+.ui-autocomplete{z-index:9999 !important;max-height: 290px;overflow-y: auto;}
+
+.left_box .form-control option:disabled { opacity: 0.3; }
+
+label input.radiobox[type="radio"]:checked+span:before {
+    color: #2e7bcc !important;  
+    content: "" !important;
+}
+
+/* End Admin Manager Css Merged From Here */
+
+/* Start Task Manager Css Merged From Here */
+
+/* legend{border:0px;}
+.newIssue { background: #FCBDBD }
+.assignedIssue { background: #C2DFFF }
+.feedbackIssue { background: #E3B7EB }
+.acknowledgedIssue { background: #FFCD85 }
+.confirmedIssue { background: #FFF494 }
+.resolvedIssue { background: #D2F5B0 }
+.closedIssue { background: #C9CCC4 }
+.event-info { background-color: #57889c; color: #57889c; }
+.event-warning { background-color: #c79121; color: #c79121; }
+.event-important { background-color: #a90329; color: #a90329; }
+.event-special { background-color: #6e3671; color: #6e3671; }
+.event-success { background-color: #739e73; color: #739e73; }
+.event-inverse { background-color: #92a2a8; color: #92a2a8; }
+.fleft { float: left; }
+.fright { float: right; }
+.mrR1 { margin-right: 1px; }
+.add-task {
+    position: relative; float: right; top: -25px;
+}
+.select-activity {
+    width: 94%;
+}
+.manageEvents label {
+    display: block;
+    margin-bottom: 5px;
+}
+.txt-color-white {
+    color: #fff!important
+}
+.jarviswidget-color-blueDark>header {
+    border-color: #45474b!important;
+    background: #4c4f53;
+    color: #fff !important;
+}
+.list-action a {
+    text-decoration: none;
+    color: #333;
+    padding: 2px;
+    cursor: pointer;
+    font-size: 110%;
+}
+.feedback-list-admin{
+    margin-top: 10px;
+    list-style-type: none;
+}
+.feedback-list{
+    margin-left: 10px;
+    margin-top: 10px;
+    list-style-type: none;
+}
+.feedback-list li {
+    line-height: 30px;
+}
+.feedback-list span {
+    font-size: 12px;
+}
+.status-in-progress{
+    background-color: #d9edf7;
+} 
+.status-completed{
+    background-color: #49C192;    
+}
+.status-not-completed{
+    background-color:#fcf8e3;
+}
+.status-help-me{
+    background-color: #ffcd85;
+}
+.register-cl{
+    float: left;
+    padding: 0 15px;
+    width: 50%;
+}
+.noBorderList .k-block, .noBorderList .k-widget {  background-color: transparent!important; }
+.noBorderList .k-block, .noBorderList .k-header, .noBorderList .k-grid-header, .noBorderList .k-toolbar, .noBorderList .k-grouping-header, .noBorderList .k-pager-wrap, .noBorderList .k-button, .noBorderList .k-draghandle, .noBorderList .k-treemap-tile, 
+html .noBorderList .km-pane-wrapper .noBorderList .k-header { background-color: transparent!important; background-image: none!important;}
+.noBorderList .k-header, .noBorderList .k-grid-header-wrap, .noBorderList .k-grid .noBorderList .k-grouping-header, .noBorderList .k-grid-header, .noBorderList .noBorderList .k-pager-wrap, .noBorderList .k-pager-wrap .noBorderList .k-textbox, 
+.noBorderList .k-pager-wrap .noBorderList .k-link, .noBorderList .k-grouping-header .noBorderList .k-group-indicator, .noBorderList .noBorderList .k-gantt-toolbar .noBorderList .k-state-default { border-color: transparent!important;}
+.noBorderList .k-grid-header, .noBorderList .k-grid-footer { padding-right: 0!important; }
+.noBorderList .k-alt, .noBorderList .k-separator, .noBorderList .k-pivot-layout>tbody>tr:first-child>td:first-child { background-color: transparent!important; }
+.noBorderList .k-group, .noBorderList .k-toolbar, .noBorderList .k-grouping-header, .noBorderList .k-pager-wrap, .noBorderList .k-group-footer td, .noBorderList .noBorderList .k-grid-footer, .noBorderList .k-footer-template td, 
+.noBorderList .k-widget .noBorderList .k-status, .noBorderList .k-calendar th, .noBorderList .k-dropzone-hovered, .noBorderList .k-widget.k-popup { background-color: transparent!important; }
+.noBorderList .k-grid-content { overflow-y: auto!important; }
+.noBorderList .k-block, .noBorderList .k-widget, .noBorderList .k-input, .noBorderList .k-textbox, .noBorderList .k-group, .noBorderList .k-content, .noBorderList .k-header, .noBorderList .k-filter-row>th, .noBorderList .k-editable-area, .noBorderList .k-separator, 
+.noBorderList .k-colorpicker .noBorderList .k-i-arrow-s, .noBorderList .k-textbox>input, .noBorderList .k-autocomplete, .noBorderList .k-dropdown-wrap, .noBorderList .k-toolbar, .noBorderList .k-group-footer td, .noBorderList .k-grid-footer, 
+.noBorderList .k-footer-template td, .noBorderList .k-state-default, .noBorderList .k-state-default .noBorderList .k-select, .noBorderList .k-state-disabled, .noBorderList .k-grid-header, .noBorderList .k-grid-header-wrap, 
+.noBorderList .k-grid-header-locked, .noBorderList .k-grid-footer-locked, .noBorderList .k-grid-content-locked, .noBorderList .k-grid td, .noBorderList .k-grid td.k-state-selected, 
+.noBorderList .k-grid-footer-wrap, .noBorderList .k-pager-wrap, .noBorderList .k-pager-wrap .noBorderList .k-link, .noBorderList .k-pager-refresh, .noBorderList .k-grouping-header, 
+.noBorderList .k-grouping-header .noBorderList .k-group-indicator, .noBorderList .k-panelbar>.k-item>.k-link, .noBorderList .k-panel>.k-item>.k-link, .noBorderList .k-panelbar .noBorderList .k-panel, 
+.noBorderList .k-panelbar .noBorderList .k-content, .noBorderList .k-treemap-tile, .noBorderList .k-calendar th, .noBorderList .k-slider-track, .noBorderList .k-splitbar, .noBorderList .k-dropzone-active, .noBorderList .k-tiles, 
+.noBorderList .k-toolbar, .noBorderList .k-tooltip, .noBorderList .k-button-group .noBorderList .k-tool, .noBorderList .k-upload-files { border-color: transparent!important;}
+.noBorderList .k-footer-template td { border-width: 0!important;}
+.noBorderList .k-footer-template td { text-align: left; }
+.noBorderList .k-grid-header th { font-weight: bold!important; }
+.noBorderList .k-group, .noBorderList .k-toolbar, .noBorderList .k-grouping-header, .noBorderList .k-pager-wrap, .noBorderList .k-group-footer td, .noBorderList .k-grid-footer, .noBorderList .k-footer-template td, .noBorderList .k-widget .noBorderList .k-status, .noBorderList .k-calendar th, .noBorderList .k-dropzone-hovered, .noBorderList .k-widget.k-popup { background-color: transparent !important }
+.noBorderList .k-grid td {  padding: 0.2em .6em!important; }
+nav ul li a{font-size:11px !important;}
+.k-grid-header th.k-header, .k-filter-row th{vertical-align:middle;}
+.k-draghandle.k-state-selected:hover, .k-ghost-splitbar-horizontal, .k-ghost-splitbar-vertical, .k-list>.k-state-highlight, .k-list>.k-state-selected, .k-marquee-color, .k-panel>.k-state-selected, .k-scheduler .k-scheduler-toolbar .k-state-selected, .k-scheduler .k-today.k-state-selected, .k-state-selected, .k-state-selected:link, .k-state-selected:visited{
+	background-color: #494870;
+    border-color: #494870;
+}
+th, th a.k-link,td{font-size:11px; text-align: left;}
+.pull-left{padding-right:5px;}
+.k-grid, .k-listview{border:0px;} */
+
+/* End Task Manager Css Merged From Here */

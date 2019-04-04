@@ -1,0 +1,19 @@
+<div id="page-{{pageID}}">
+<section id="widget-grid-{{pageUniqueKey}}" class="{{pageUniqueKey}}_calendarPage" >    
+    <!-- ROW STARTS -->
+    <div class="row podRowOne">
+
+        <!-- POD STARTS -->
+        <article class="col-sm-12 col-md-12 col-lg-12 POD_ONE">
+            <div class="podContainer text-center responsive-container">
+                <inner-loader class="loaderHelper" [options]="calendarGridInnerLoader"></inner-loader>
+                <no-data-found [options]="calendarGridInnerLoader"></no-data-found>
+                <ult-grid [hidden]="calendarGridInnerLoader.showInnerLoader||calendarGridInnerLoader.customError!=''" [options]="dataCalendarGrid" class="{{pageUniqueKey}}_calendarGrid  ag-fresh"></ult-grid>
+            </div>
+        </article>
+        <!-- POD ENDS -->
+
+    </div>	
+
+</section>
+</div>

@@ -1,0 +1,177 @@
+<div id="page-{{pageID}}">
+	<section id="widget-grid-{{pageUniqueKey}}" style="padding-left: 15px;" class="{{pageUniqueKey}}_ContributionAnalysisPage contribution_analysis_page">    
+	    <div class="row" id="{{pageUniqueKey}}SelectionFrame">
+	        <div class="col-sm-12 col-md-12 col-lg-12">
+	            <!-- selection row start -->
+	            <div class="selectionPart selectionPartTop">
+	                <div class="measureBoxs measurePositionTop">
+	                    <time-selection #timeselectionCall (selectionDataEvent)="setSelectionData('');" id="timeSelection" [hidden]="timeSelectionUnit == 'days' && showTimeSelection == false && isSif == true"></time-selection>
+                        <product-selection #productselectionCall (selectionDataEvent)="setSelectionData('');"
+                        id="productSelection" isShowProductFilter="isShowProductFilter"></product-selection>
+                        <market-selection #marketselectionCall  (selectionDataEvent)="setSelectionData('');" id="marketSelection"></market-selection>
+                        <measure-selection #measureselectionCall  (selectionDataEvent)="setSelectionData('');" id="measureSelection"></measure-selection>
+
+	                    <div class="measureBox measureBox6" [hidden]="!showFieldSelection">
+	                        <div class="measureBox-title marginBottom">
+	                            Field Selection
+	                        </div>
+	                        <div class="measureBox-content">
+	                            <select (change)="setSelectionData('');" [(ngModel)]="selectedField" class="ng-pristine ng-valid">	                            	
+	                            <option *ngFor="let obj of fieldSelection" [ngValue]="obj">{{obj.label}}</option>
+	                            </select>
+	                        </div>
+	                    </div>
+	                    <div [hidden]="!isShowPrivateLabel" class="measureBox measureBox6">
+	                        <div class="measureBox-title marginBottom">
+	                            Hide Private Label
+	                        </div>
+	                        <div class="measureBox-content">
+	                            <input type="checkbox" [checked]="isCheckedPrivateLabel != undefined ? isCheckedPrivateLabel : true" [(ngModel)]="hidePrivateLabel" (change)="changeHidePrivateLabel()" />
+	                        </div>
+	                    </div>
+	                    <div class="measureBox measureBox6" [hidden]="!showHardStopSelection">
+	                        <div class="measureBox-title marginBottom">
+	                            Hard Stop
+	                            <span><i class="fa fa-filter"></i></span>
+	                        </div>
+	                        <select (change)="changeHardStockValue();" [(ngModel)]="toDate" style="width:100%;"> 
+	                        	<option *ngFor="let obj of gridWeek" [ngValue]="obj">{{obj.label}}</option>
+	                        </select>
+	                    </div>
+	                    
+	                </div>
+	                <!-- <product-market-selection-inline id="productMarketSelectionInline" isShowProductFilter="isShowProductMarketSelectionInlineFilter" ng-show="showProductMarketSelectionInlineFilter"></product-market-selection-inline> -->
+	                <!-- <product-market-selection-inline-bread-crum isShowProductFilter="isShowProductMarketSelectionInlineFilter" ng-show="showProductMarketSelectionInlineFilter"></product-market-selection-inline-bread-crum> -->
+	            </div>            
+	            <!-- selection row end -->
+	        </div>
+	    </div>
+
+	    <!-- ROW STARTS -->
+
+
+	    <div class="row contributionAnalysisContainer conAnaTopContainer">
+	        <div class="col-sm-12 col-md-12 col-lg-12">
+	            <div id="newsGrowersGridDiv-{{pageUniqueKey}}" class="contribution_part" >
+	                <div class="podContainer" style="width: 100%; box-shadow: none !important;">
+	                    <div style="text-align: center; font-weight: bold; background: #D8CC04; font-size: 16px; height:30px; width: 100.5%; line-height: 35px;">NEW</div>
+	                    <inner-loader [options]="contribution.loader.news"></inner-loader>
+	                    <ult-grid  [hidden]="contribution.loader.news.showInnerLoader" [options]="newsGrid" id="newGrid" class="{{pageUniqueKey}}_newsGrid ag-fresh"></ult-grid>
+	                </div><br />
+	                <div class="podContainer" style="width: 100%; box-shadow: none !important;">
+	                    <div style="text-align: center; font-weight: bold; background: #72D652; font-size: 16px; height:30px; width: 100.5%;     margin-top: 40px; line-height: 35px;">GROWERS</div>
+	                    <inner-loader [options]="contribution.loader.growers"></inner-loader>
+	                    <ult-grid  id="growersGrid" [hidden]="contribution.loader.growers.showInnerLoader" [options]="growersGrid"  class="{{pageUniqueKey}}_growersGrid ag-fresh"></ult-grid>
+	                </div>
+	            </div>
+	            <div class="contribution_part_space" >&nbsp;</div>
+	            <div id="chartDiv-{{pageUniqueKey}}" class="contribution_part " >
+	            	<div class="podContainerMid" style="width: 100%;">
+		                <inner-loader [options]="contribution.loader.netChange"></inner-loader>
+		                <div style="height: 100%; width: 100%;" [hidden]="contribution.loader.netChange.showInnerLoader" >
+		                    <!-- 
+		                    <div [hidden]="contribution.loader.netChange.showInnerLoader" id="netChangeChart" kendo-chart k-options="netChangeChart" k-rebind="netChangeChart" class="responsive-container {{pageUniqueKey}}_netChangeGrid"></div>
+		                    <div context-menu options="contribution.contextOptions.netChange"></div> -->
+
+
+		                    <kendo-chart #chartObj="kendoChart" class="chart_container{{pageUniqueKey}}" 
+		                    *ngIf="netChangeChart != undefined" 
+						    [legend]="netChangeChart.legend"
+						    [panes]="netChangeChart.panes"
+						    [seriesDefaults]="netChangeChart.seriesDefaults"
+							[valueAxis]="netChangeChart.valueAxis"
+					        [categoryAxis]="netChangeChart.categoryAxis"
+					        [tooltip]="netChangeChart.tooltip"
+					        [series]="netChangeChart.series"
+						    >
+						    	<kendo-chart-series>
+									<kendo-chart-series-item *ngFor="let item of netChangeChart.series" [data]="item.data" type="column" name="{{item.name}}" color="{{item.color}}" >
+				                        <kendo-chart-series-item-tooltip>
+				                            <ng-template let-series="series" let-value="value">
+				                            	{{series.name}}: {{ value | nformatter:measureDataDecimalPlaces }}		
+				                            </ng-template>
+				                        </kendo-chart-series-item-tooltip>
+				                    </kendo-chart-series-item>
+				                </kendo-chart-series>
+
+							</kendo-chart>
+							<app-context-menu  *ngIf="netChangeChart != undefined" [contextOptions]="netChangeChartContextOptions" (menuSelect)="onContextMenuSelect($event)"></app-context-menu>
+
+							
+		                </div>
+		            </div>
+	            </div>
+	            <div class="contribution_part_space" >&nbsp;</div>
+	            <div id="dropsDeclinersGridDiv-{{pageUniqueKey}}" class="contribution_part" >
+	                <div class="podContainer" style="width: 100%; box-shadow: none !important;">
+	                    <div style="text-align: center; font-weight: bold; background: #5698BA; font-size: 16px; height:30px; width: 100.5%; line-height: 35px;">DROPS</div>
+	                    <inner-loader [options]="contribution.loader.drops"></inner-loader>
+	                    <ult-grid  id="dropsGrid" [hidden]="contribution.loader.drops.showInnerLoader" [options]="dropsGrid" class="{{pageUniqueKey}}_dropsGrid ag-fresh"></ult-grid>
+	                </div><br />
+	                <div class="podContainer" style="width: 100%; box-shadow: none !important;">
+	                    <div style="text-align: center; font-weight: bold; background: #AD3A34; font-size: 16px; height:30px; width: 100.5%; margin-top: 40px; line-height: 35px;">DECLINERS</div>
+	                    <inner-loader [options]="contribution.loader.decliners"></inner-loader>
+	                    <ult-grid  id="declinersGrid" [hidden]="contribution.loader.decliners.showInnerLoader" [options]="declinersGrid"  class="{{pageUniqueKey}}_declinersGrid ag-fresh"></ult-grid>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="bottomMsgContainer" style="clear: both; margin-top: 40px;">
+	        <div style="float: left; width: 33%; text-align: center; font-weight: bold; color: #14425F;"><p>Effect of New and Growers <br/>{{totalNewersAndGrowers > 0? "+":""}}{{totalNewersAndGrowers | number:measureDataDecimalPlaces}}</p></div>
+	        <div style="float: left; width: 33%; text-align: center; font-weight: bold; color: #14425F;"><p>Net Change =<br/><span style="font-size: 16px;" ng-class="{ red: netChanges < 0,green: netChanges > 0 }"> {{netChanges > 0? "+":""}}{{netChanges| number:measureDataDecimalPlaces}}</span></p></div>
+	        <div style="float: left; width: 33%; text-align: center; font-weight: bold; color: #14425F;"><p>Effect of Drops and Decliners <br/>{{totalDropersAndDecliners > 0? "+":""}}{{ totalDropersAndDecliners | number:measureDataDecimalPlaces}}</p></div>
+	    </div>
+
+	    <kendo-window title="{{chartTitle}}" *ngIf="chartPopup" (close)="chartPopup=false" [minWidth]="500" [minHeight]="400" [width]="800">
+	    		<kendo-window-titlebar>
+		            <div class='k-window-title'>{{chartTitle}}</div>
+		            <button kendoButton (click)="exportPopup($event)" [look]="'bare'" [icon]="'image'">Export</button>
+		            <button kendoWindowMaximizeAction></button>
+		            <button kendoWindowRestoreAction></button>
+		            <button kendoWindowCloseAction></button>
+		        </kendo-window-titlebar>
+                <div class="row loaderHelperParent"> 
+                    <inner-loader class="loaderHelper" [options]="popupInnerLoader"></inner-loader>
+                    <div style="height: 300px" id="contributionLineChart" class="contribution_popup_chart_{{pageUniqueKey}} responsive-container">
+                    	<kendo-chart  #popupChartObj="kendoChart" 
+                    	*ngIf="contributionLineChart != undefined" 
+					    [legend]="contributionLineChart.legend"
+					    [panes]="contributionLineChart.panes"
+					    [seriesDefaults]="contributionLineChart.seriesDefaults"
+						[valueAxis]="contributionLineChart.valueAxis"
+				        [categoryAxis]="contributionLineChart.categoryAxis"
+				        [tooltip]="contributionLineChart.tooltip"
+				        [series]="contributionLineChart.series"
+					    >
+
+					    	<kendo-chart-title text="{{chartTitleTg}}"></kendo-chart-title>
+					    	<kendo-chart-series>
+								<kendo-chart-series-item *ngFor="let item of contributionLineChart.series" [data]="lineChartData" field="{{item.field}}" type="line" name="{{item.name}}" color="{{item.color}}" categoryField="{{catAxisFdName}}" >			    		
+			                        <kendo-chart-series-item-tooltip>
+			                            <ng-template let-series="series" let-value="value" let-category="category">
+			                                <div style="text-align: center;">
+			                                    <div>{{series.name}}</div>
+			                                    <div>{{category}}</div>
+			                                    <div>
+			                                        <span>{{ value | nformatter:lineChartDecimalPlace }}</span>
+			                                    </div>
+			                                </div>
+			                            </ng-template>
+			                        </kendo-chart-series-item-tooltip>
+			                    </kendo-chart-series-item>
+			                </kendo-chart-series>
+
+						</kendo-chart>
+                    </div>
+                </div>
+
+        </kendo-window>
+	    
+	</section>
+	<!-- <script type="text/javascript">
+	    var contributionPageInit = contributionPageInit == undefined ? true : false;
+	    if ( contributionPageInit == true ){
+	        layoutSetup({pageContainer: ".contribution_analysis_page", layout: 'CONTRIBUTION_ANALYSIS'});
+	    }
+	</script> -->
+</div>

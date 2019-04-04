@@ -1,0 +1,127 @@
+<!-- widget grid -->
+<div id="page-{{pageID}}">
+<section id="widget-grid-{{pageUniqueKey}}" class="{{pageUniqueKey}}_SummaryPage widgetGridSection summary_page_layout">
+    <div class="row" id="{{pageUniqueKey}}SelectionFrame">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <!-- selection row start -->
+            <div class="measureBoxs measurePositionTop">
+                <time-selection #timeselectionCall (selectionDataEvent)="setSelectionData();" [hidden]="!showTimeSelection"></time-selection>
+                <product-selection #productselectionCall (selectionDataEvent)="setSelectionData();" [hidden]="!showProductFilter"></product-selection>
+                <market-selection  #marketselectionCall  (selectionDataEvent)="setSelectionData();" [hidden]="!showMarketFilter"></market-selection>
+                <measure-selection #measureselectionCall  (selectionDataEvent)="setSelectionData();" [hidden]="!showMeasureSelection"></measure-selection>
+                <div class="measureBox measureBox6">
+                    <div class="measureBox-title marginBottom">
+                        Hide Private Label
+                    </div>
+                    <div class="measureBox-content">
+                        <input type="checkbox" [checked]="isCheckedPrivateLabel != undefined ? isCheckedPrivateLabel : true" [(ngModel)]="hidePrivateLabel" (change)="changeHidePrivateLabel()" />
+                    </div>
+                </div>
+            </div>
+            <!-- selection row end -->
+        </div>
+        <product-market-selection-inline id="productMarketSelectionInline" isShowProductFilter="isShowProductMarketSelectionInlineFilter" [hidden]="!showProductMarketSelectionInlineFilter"></product-market-selection-inline>
+    </div>    
+
+    <!-- ROW STARTS -->
+    <div class="row podRowTwo">
+        <!-- POD STARTS -->
+        <article class="POD_ONE" [ngClass]="totalSalesChartOptions.podClass">
+            <div class="jarviswidget jarviswidget-color-blueDark TOTAL_SALES_POD_CONTAINER" id="wid-id-0-{{pageUniqueKey}}" data-widget-editbutton="false" style="margin: 0px;">
+                <header class="">
+                    <div style="float:right;margin:-9px 9px;">
+                        <a class="cursor_pointer" (click)="setFullScreen('wid-id-0', 'totalSalesChartOptions')"><i class="fa fa-expand"></i></a>
+                    </div>
+                    <h2>Total Sales</h2>
+                </header>
+                <div class="podContainer totalSalesChart">
+                    <total-sales-column-chart [options]="totalSalesChartOptions"></total-sales-column-chart>
+                </div>
+
+            </div>
+        </article>
+        <!-- POD ENDS -->
+
+
+        <!-- POD STARTS -->
+        <article class="POD_TWO" [ngClass]="shareByChartOptions.podClass">
+            <div class=" jarviswidget jarviswidget-color-blueDark SHARE_POD_CONTAINER" id="wid-id-1-{{pageUniqueKey}}" data-widget-editbutton="false" style="margin: 0px;">
+                <header>
+                    <div style="float:right;margin:-9px 9px;">
+                        <a (click)="setFullScreen('wid-id-1', 'shareByChartOptions')"><i class="fa fa-expand"></i></a>
+                    </div>
+                    <h2>{{POD_TWO_TITLE}}</h2>
+                </header>
+
+                <div class="podContainer">
+                    <share-pie-chart [options]="shareByChartOptions"></share-pie-chart>
+                </div>
+
+            </div>
+        </article>
+        <!-- POD ENDS -->
+
+        <!-- POD STARTS -->
+        <article class="POD_THREE" [ngClass]="performanceByChartOptions.podClass">
+            <div class=" jarviswidget jarviswidget-color-blueDark PERFORMANCE_POD_CONTAINER" id="wid-id-2-{{pageUniqueKey}}" data-widget-editbutton="false" style="margin: 0px;">
+                <header>
+                    <div style="float:right;margin:-9px 9px;">
+                        <a (click)="setFullScreen('wid-id-2', 'performanceByChartOptions')"><i class="fa fa-expand"></i></a>
+                    </div>
+                    <h2>{{POD_THREE_TITLE}}</h2>
+                </header>
+                <div class="podContainer">
+                    <performance-column-chart [options]="performanceByChartOptions" ></performance-column-chart>
+                </div>
+            </div>
+        </article>
+        <!-- POD ENDS -->
+
+    </div>	
+    <!-- ROW ENDS -->
+    <!-- ROW STARTS -->
+    <div class="row podRowTwo">
+
+        <!-- POD STARTS -->
+        <article class="POD_FOUR" [ngClass]="shareByPodTwoChartOptions.podClass">
+            <div class=" jarviswidget jarviswidget-color-blueDark SHARE_POD_CONTAINER" id="wid-id-3-{{pageUniqueKey}}" data-widget-editbutton="false" style="margin: 0px;">
+
+                <header>
+                    <div style="float:right;margin:-9px 9px;">
+                        <a (click)="setFullScreen('wid-id-3', 'shareByPodTwoChartOptions')"><i class="fa fa-expand"></i></a>
+                    </div>
+                    <h2>{{POD_FOUR_TITLE}}</h2>
+                </header>
+
+                <div class="podContainer">
+                    <share-pie-chart [options]="shareByPodTwoChartOptions" ></share-pie-chart>
+                </div>
+
+            </div>
+        </article>
+        <!-- POD ENDS -->
+
+
+        <!-- POD STARTS -->
+        <article class="POD_FIVE" [ngClass]="performanceByPodTwoChartOptions.podClass">
+            <div class=" jarviswidget jarviswidget-color-blueDark PERFORMANCE_POD_CONTAINER" id="wid-id-4-{{pageUniqueKey}}" data-widget-editbutton="false" style="margin: 0px;">
+
+                <header>
+                    <div style="float:right;margin:-9px 9px;">
+                        <a (click)="setFullScreen('wid-id-4', 'performanceByPodTwoChartOptions')"><i class="fa fa-expand"></i></a>
+                    </div>
+                    <h2>{{POD_FIVE_TITLE}}</h2>
+                </header>
+
+                <div class="podContainer">
+                    <performance-column-chart [options]="performanceByPodTwoChartOptions" ></performance-column-chart>
+                </div>
+
+            </div>
+        </article>
+        <!-- POD ENDS -->
+
+    </div>	
+    <!-- ROW ENDS -->
+</section>
+</div>

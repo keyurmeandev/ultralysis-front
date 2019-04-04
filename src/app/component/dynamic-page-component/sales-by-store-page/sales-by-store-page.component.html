@@ -1,0 +1,50 @@
+<div id="page-{{pageID}}">
+<section id="widget-grid-SalesByStore-{{pageUniqueKey}}" class="{{pageUniqueKey}}_provinceSaleStore SaleByStore">  
+	<jqxSplitter #splitContainer width="100%" [height]="pageHeight" [panels]="[{ size: '20%' }]" [orientation]="'vertical'" id="{{pageUniqueKey}}_splitContainer" class="splitter">
+        <div>
+            <div id="{{pageUniqueKey}}FilterContainer">
+                <div class="measureBoxs measurePositionLeft">
+                    <time-selection #timeselectionCall (selectionDataEvent)="setSelectionData('');" id="timeSelection" [hidden]="timeSelectionUnit == 'days' && showTimeSelection == false && isSif == true"></time-selection>
+                    <product-selection #productselectionCall (selectionDataEvent)="setSelectionData('');"
+                    id="productSelection" isShowProductFilter="isShowProductFilter"></product-selection>
+                    <market-selection #marketselectionCall  (selectionDataEvent)="setSelectionData('');" id="marketSelection"></market-selection>
+                    <measure-selection #measureselectionCall  (selectionDataEvent)="setSelectionData('');" id="measureSelection"></measure-selection>
+
+                    <div [hidden]="!isShowPrivateLabel" class="measureBox measureBox6">
+                        <div class="measureBox-title marginBottom">
+                            Hide Private Label
+                        </div>
+                        <div class="measureBox-content">
+                            <input type="checkbox" [checked]="isCheckedPrivateLabel != undefined ? isCheckedPrivateLabel : true" [(ngModel)]="hidePrivateLabel" (change)="changeHidePrivateLabel()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div><!--split right container start-->
+            <!-- ROW STARTS -->
+            <div class="fullRow">
+                <!-- POD STARTS -->
+                <article class=" col-md-12">
+                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0-{{pageUniqueKey}}" data-widget-editbutton="false" style="margin: 0px; height: 96%">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>PRODUCT VIEW</h2>
+                        </header>
+                        <div class="podContainer">
+                            <inner-loader [options]="gridLoaderOption"></inner-loader>
+                            <no-data-found [options]="gridLoaderOption"></no-data-found>
+                            <ult-grid [hidden]="gridLoaderOption.showInnerLoader&&gridLoaderOption.customError!=''" [options]="gridData" class="{{pageUniqueKey}}_salesByStoreGrid responsive-container ag-fresh"></ult-grid>
+                        </div>
+                    </div>
+                </article>
+                <!-- POD ENDS -->
+
+            </div>	
+            <!-- ROW ENDS -->
+
+            <!-- split right container end-->
+        </div>
+    </jqxSplitter>
+</section>
+</div>

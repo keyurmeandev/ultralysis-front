@@ -1,0 +1,211 @@
+<div id="page-{{pageID}}">
+	<section id="widget-grid-{{pageUniqueKey}}" class="{{pageUniqueKey}}_EfficiencyPage">  
+        <jqxSplitter #splitContainer width="100%" [height]="pageHeight" [panels]="[{ size: '20%' }]" [orientation]="'vertical'" id="{{pageUniqueKey}}_splitContainer" class="splitter">
+	        <div>
+	            <div id="{{pageUniqueKey}}FilterContainer">
+	            	 <div [ngClass]="measurePositionClass" class="measureBoxs">
+                        <time-selection #timeselectionCall (selectionDataEvent)="setSelectionData('');" id="timeSelection" [hidden]="timeSelectionUnit == 'days' && showTimeSelection == false && isSif == true"></time-selection>
+                        <product-selection #productselectionCall (selectionDataEvent)="setSelectionData('');"
+                        id="productSelection" isShowProductFilter="isShowProductFilter"></product-selection>
+                        <market-selection #marketselectionCall  (selectionDataEvent)="setSelectionData('');" id="marketSelection"></market-selection>
+                        <measure-selection #measureselectionCall  (selectionDataEvent)="setSelectionData('');" id="measureSelection"></measure-selection>
+
+	                    <div class="measureBox measureBox6">
+	                        <div class="measureBox-title">
+	                            {{accountTitle}} %
+	                        </div><br>
+	                        <div class="row filterContainer" style="width:98%; margin:0; ">
+	                            <kendo-slider (valueChange)="changeRange()" id="{{pageUniqueKey}}_efficiencySlider"
+			                        [fixedTickWidth]="10"
+			                        [min]="0"
+			                        [max]="100"
+			                        [smallStep]="5"
+			                        [(ngModel)] = "range"
+			                    ></kendo-slider>
+	                        </div>
+
+	                    </div>
+
+	                    <div [hidden]="!isShowPrivateLabel" class="measureBox measureBox6">
+	                        <div class="measureBox-title marginBottom">
+	                            Hide Private Label
+	                        </div>
+	                        <div class="measureBox-content">
+	                            <input type="checkbox" [checked]="isCheckedPrivateLabel != undefined ? isCheckedPrivateLabel : true" [(ngModel)]="hidePrivateLabel" (change)="changeHidePrivateLabel()" />
+	                        </div>
+	                    </div>
+	                    
+	                    <div class="measureBox measureBox6" [hidden]="!showSkuSelection">
+	                        <div class="measureBox-title marginBottom">
+	                            SKU
+	                        </div>
+	                        <div class="measureBox-content">
+	                            <select class="primary-market" name="FSku" [(ngModel)]="selectedSkuID" (change)="setSelectionData()" >
+	                                <!-- <option ng-selected="{{obj.selected}}" ng-repeat="obj in $root.skuSelectionList" value="{{obj.data}}">{{obj.label}}</option> -->
+	                                <option *ngFor="let obj of skuSelectionList" [ngValue]="obj">{{obj.label}}</option>
+	                            </select>     
+	                        </div>
+	                    </div>
+	                    
+	                    <div class="measureBox measureBox6" [hidden]="!showHardStopSelection">
+	                        <div class="measureBox-title marginBottom">
+	                            Hard Stop
+	                            <span><i class="fa fa-filter"></i></span>
+	                        </div>
+	                        <select (change)="changeHardStockValue();" [(ngModel)]="toDate" style="width:100%;"> 
+	                        	<option *ngFor="let obj of gridWeek" [ngValue]="obj">{{obj.label}}</option>
+	                        </select>
+	                    </div>                    
+	                    
+	                </div>
+	                <!-- <product-market-selection-inline id="productMarketSelectionInline" isShowProductFilter="isShowProductMarketSelectionInlineFilter" [hidden]="!showProductMarketSelectionInlineFilter"></product-market-selection-inline> -->
+	                <!-- <product-market-selection-inline-bread-crum isShowProductFilter="isShowProductMarketSelectionInlineFilter" [hidden]="!showProductMarketSelectionInlineFilter"></product-market-selection-inline-bread-crum>                 -->
+	            </div>
+	        </div>
+	        
+	        <div>
+	        <!-- ROW STARTS -->
+	        <div class="" [ngClass]="topRowClass">
+	            <!-- POD STARTS -->
+	            <article class="col-sm-6 col-md-4 col-lg-4 POD_ONE">
+	                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0-{{pageUniqueKey}}" data-widget-editbutton="false" data-widget-fullscreenButton="false" style="margin: 0px;">
+
+	                    <header>
+	                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+	                        <h2>{{titleOfTotolCount}} Range Efficiency Summary</h2>
+	                    </header>
+
+	                    <div class="podContainer">
+	                        <inner-loader [options]="PageVar.loader.summary"></inner-loader>
+	                        <table [hidden]="PageVar.loader.summary.showInnerLoader" class="table">
+	                            <tr>
+	                                <td style="text-align: left">{{totalSkuText}}</td>
+	                                <td>{{totalSku}}</td>
+	                                <td>[{{signMsg}}{{totalSumOfSku | nformatter:dataDecimalPlaces}}]</td>
+	                            </tr>                                
+	                            <tr>
+	                                <td style="text-align: left">{{topSkuText}}</td>
+	                                <td>{{topSku}}</td>
+	                                <td>[{{signMsg}}{{ totalSumOfTopSku | nformatter:dataDecimalPlaces}}]</td>
+	                            </tr>
+	                            <tr>
+	                                <td style="text-align: left">{{tailSkuText}}</td>
+	                                <td>{{tailSku}}</td>
+	                                <td>[{{signMsg}}{{ totalSumOfTailSku | nformatter:dataDecimalPlaces}}]</td>
+	                            </tr>
+	                        </table>
+	                    </div>
+
+	                </div>
+	            </article>
+	            <!-- POD ENDS -->
+
+	            <!-- POD STARTS -->
+	            <article class="col-sm-6 col-md-8 col-lg-8 POD_TWO" >
+	                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1-{{pageUniqueKey}}" data-widget-editbutton="false" data-widget-fullscreenButton="false" style="margin: 0px;">
+
+	                    <header>
+	                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+	                        <h2>{{titleOfSelectedChart}}</h2>
+	                    </header>
+
+	                    <div class="podContainer">
+
+	                        <inner-loader [options]="PageVar.loader.rangeBarChart"></inner-loader>
+							<!-- <no-data-found [options]="PageVar.loader.showPODNoDataFound"></no-data-found> -->
+							<div class="chartContainer" [hidden]="PageVar.loader.rangeBarChart.showInnerLoader">
+								<!-- <kendo-chart  
+								[seriesDefaults]="chartOptions.seriesDefaults"
+								[valueAxis]="chartOptions.valueAxis"
+						        [categoryAxis]="chartOptions.categoryAxis"
+						        [tooltip]="chartOptions.tooltip"
+						        [series]="chartOptions.series"
+								>
+								<kendo-chart-series-item-tooltip format="Series 1 value: {0}">
+      							</kendo-chart-series-item-tooltip> 
+      							<kendo-chart-series-item-tooltip format="Series 2 value: {0}">
+      							</kendo-chart-series-item-tooltip>     							
+							    </kendo-chart> -->
+							    <kendo-chart 
+							    [legend]="chartOptions.legend"
+							    [panes]="chartOptions.panes"
+							    [seriesDefaults]="chartOptions.seriesDefaults"
+								[valueAxis]="chartOptions.valueAxis"
+						        [categoryAxis]="chartOptions.categoryAxis"
+						        [tooltip]="chartOptions.tooltip"
+						        [series]="chartOptions.series"
+							    >
+      								<kendo-chart-series>
+									    <kendo-chart-series-item type="bar" color="#86b52b" [stack]="{ type: '100%' }" [data]="rangeBarChartData.valueBar">
+									    	<kendo-chart-series-item-tooltip>
+									    		<ng-template let-value="value">
+									              Top 20% Skus: {{ value | nformatter:1 }}%
+									          	</ng-template>
+      										</kendo-chart-series-item-tooltip> 
+								        </kendo-chart-series-item>
+								        <kendo-chart-series-item type="bar" color="#666666" [data]="rangeBarChartData.skuBar">
+								        	<kendo-chart-series-item-tooltip>
+								        		<ng-template let-value="value">
+									              Skus in tail: {{ value | nformatter:1 }}%
+									          	</ng-template>
+      										</kendo-chart-series-item-tooltip> 
+								        </kendo-chart-series-item>
+								    </kendo-chart-series>
+
+								</kendo-chart>
+							</div>
+	                    </div>
+
+	                </div>
+	            </article>
+	            <!-- POD ENDS -->
+
+	        </div>  
+	        <!-- ROW ENDS -->
+
+	        <!-- ROW STARTS -->
+	        <div class="" [ngClass]="bottomRowClass">
+	        <!-- <div class="{{podThreeClass}}"> -->
+	        <!-- <div class="podRowTwo" ng-if="filterPosition == 'TOP'"> -->
+	        <!-- <div class="full_row twoThirdRow" ng-if="filterPosition == 'LEFT'"> -->
+	        
+	            <!-- POD STARTS -->
+	            <article class="col-sm-6 col-md-6 col-lg-6 POD_THREE">
+	                <div class="jarviswidget" id="wid-id-2-{{pageUniqueKey}}" data-widget-editbutton="false" data-widget-fullscreenButton="false" style="margin: 0px;">
+	                    <header style="background-color: #86b52b; color: #fff;">
+	                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+	                        <h2 style="text-transform: uppercase">{{titleOfTopSkusGrid}}</h2>
+	                    </header>
+
+	                    <div class="podContainer">
+	                        <inner-loader [options]="PageVar.loader.top"></inner-loader>
+	                        <ult-grid [hidden]="PageVar.loader.top.showInnerLoader" [options]="topSkuGrid" class="{{pageUniqueKey}}_topGrid responsive-container ag-fresh"></ult-grid>
+	                    </div>
+
+	                </div>
+	            </article>
+	            <!-- POD ENDS -->            
+
+	            <!-- POD STARTS -->
+	            <article class="col-sm-6 col-md-6 col-lg-6 POD_FOUR" >
+	                <div class=" jarviswidget " id="wid-id-3-{{pageUniqueKey}}" data-widget-editbutton="false" data-widget-fullscreenButton="false" style="margin: 0px;">
+
+	                    <header style="background-color: #666666; color: #fff;">
+	                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+	                        <h2 style="text-transform: uppercase">{{titleOfTailSkusGrid}}</h2>
+	                    </header>
+
+	                    <div class="podContainer text-center">
+	                        <inner-loader [options]="PageVar.loader.tail"></inner-loader>
+	                        <ult-grid [hidden]="PageVar.loader.tail.showInnerLoader" class="{{pageUniqueKey}}_tailGrid ag-fresh" [options]="tailSkuGrid" ></ult-grid>
+	                    </div>
+
+	                </div>
+	            </article>
+
+	        </div>  
+	       </div>
+	    </jqxSplitter>
+
+	</section>	
+</div>

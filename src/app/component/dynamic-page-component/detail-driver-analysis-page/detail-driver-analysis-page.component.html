@@ -1,0 +1,167 @@
+<div id="page-{{pageID}}" style="overflow:hidden;">
+    <section id="widget-grid-{{pageUniqueKey}}" class="{{pageUniqueKey}}_DetailDriverAnalysisPage">  
+        <div>
+            <jqxSplitter #mainSplitter width="100%" height="100%" [panels]="[{ size: '20%' }]" [orientation]="'vertical'" id="{{pageUniqueKey}}_detailedDriverAnalysisSplitter" class="splitter">
+                <div>
+                    <div id="{{pageUniqueKey}}FilterContainer">
+                        <div class="measureBoxs measurePositionLeft">
+                            <time-selection #timeselectionCall (selectionDataEvent)="setSelectionData('');" id="timeSelection" [hidden]="!showTimeSelection" ></time-selection>
+                            <product-selection #productselectionCall (selectionDataEvent)="setSelectionData('');" id="productSelection" [hidden]="!showProductFilter" ></product-selection>
+                            <market-selection #marketselectionCall  (selectionDataEvent)="setSelectionData('');" id="marketSelection" [hidden]="!showMarketFilter" ></market-selection>
+                            <div class="measureBox measureBox6">
+                                <div class="measureBox-title marginBottom">
+                                    Hide Private Label
+                                </div>
+                                <div class="measureBox-content">
+                                    <input type="checkbox" [checked]="isCheckedPrivateLabel != undefined ? isCheckedPrivateLabel : true" [(ngModel)]="hidePrivateLabel" (change)="changeHidePrivateLabel()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right_container" style="position: relative !important;">
+                    <div class="responsive-container">
+                        <div class="container_pod_scroll" [hidden]="!showPriceChart" >
+                            <article class="col-md-12">
+                                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0-{{pageUniqueKey}}" data-widget-editbutton="false" data-widget-fullscreenButton="false" style="margin: 0px; height: 400px;">
+                                    <header>
+                                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                        <h2>Price</h2>
+                                    </header>
+                                    <div class="podContainer" style="height: 375px;">
+                                        <inner-loader [options]="options.price"></inner-loader>
+                                        <div [hidden]="priceChartContextOptions.isGrid == true || options.price.showInnerLoader == true || options.price.customError !=''" class="chartContainer">
+                                            <kendo-chart *ngIf="priceChart != undefined" class=" {{priceChartGridClass}} kendochartClass" #priceChartObj="kendoChart"  [legend]="priceChart.legend" [valueAxis]="priceChart.valueAxis"
+                                            (render)="priceChartRender($event)">
+                                                <kendo-chart-series>
+                                                    <kendo-chart-series-item  style="smooth" *ngFor="let item of priceChart.series" [data]="priceChartData" type="line" field="{{item.field}}" name="{{item.name}}" color="{{item.color}}" categoryField="ACCOUNT">
+                                                    </kendo-chart-series-item>
+                                                        <kendo-chart-series-item-tooltip>
+                                                            <ng-template let-series="series" let-value="value" let-category="category">
+                                                                <div style="text-align: center;">
+                                                                    <div>{{series.name}}</div>
+                                                                    <div>{{category}}</div>
+                                                                    <div><span>{{ intl.formatNumber(value, 'n'+decimalPlaces) }}</span></div>
+                                                                </div>
+                                                            </ng-template>
+                                                        </kendo-chart-series-item-tooltip>
+                                                </kendo-chart-series>
+                                            </kendo-chart>
+                                            <app-context-menu *ngIf="priceChart != undefined" [contextOptions]="priceChartContextOptions" (menuSelect)="onContextMenuSelect($event)"></app-context-menu>
+                                        </div>
+                                        <ult-grid style="height: 95%;" [hidden]="priceChartContextOptions.isGrid == false" [options]="priceGrid" class="priceGrid responsive-container ag-fresh {{priceChartGridClass}}"></ult-grid>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="container_pod_scroll" [hidden]="!showUnitChart">
+                            <article class="col-md-12">
+                                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1-{{pageUniqueKey}}" data-widget-editbutton="false" data-widget-fullscreenButton="false" style="margin: 0px; height: 400px;">
+                                    <header>
+                                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                        <h2>Unit</h2>
+                                    </header>
+                                    <div class="podContainer" style="height: 375px;">
+                                        <inner-loader [options]="options.unit"></inner-loader>
+                                        <div [hidden]="unitChartContextOptions.isGrid == true || options.unit.showInnerLoader == true || options.unit.customError !=''" class="chartContainer"> 
+                                            <kendo-chart #unitChartObj="kendoChart" class="unitChart {{unitChartGridClass}} responsive-container" [legend]="unitChart.legend" [valueAxis]="unitChart.valueAxis" *ngIf="unitChart != undefined" (render)="unitChartRender($event)">
+                                                <kendo-chart-series>
+                                                    <kendo-chart-series-item style="smooth" *ngFor="let item of unitChart.series" [data]="unitChartData" type="line" field="{{item.field}}" name="{{item.name}}" color="{{item.color}}"  categoryField="ACCOUNT">
+                                                        <kendo-chart-series-item-tooltip>
+                                                            <ng-template let-series="series" let-value="value" let-category="category">
+                                                                <div style="text-align: center;">
+                                                                    <div>{{series.name}}</div>
+                                                                    <div>{{category}}</div>
+                                                                    <div>
+                                                                        <span>{{ intl.formatNumber(value, 'n'+decimalPlaces) }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </ng-template>
+                                                        </kendo-chart-series-item-tooltip>
+                                                  </kendo-chart-series-item>
+                                                </kendo-chart-series>
+                                            </kendo-chart>
+                                            <app-context-menu *ngIf="unitChart != undefined" [contextOptions]="unitChartContextOptions" (menuSelect)="onContextMenuSelect($event)"></app-context-menu>
+                                        </div>
+                                        <ult-grid [hidden]="unitChartContextOptions.isGrid == false" [options]="unitGrid" class="unitGrid responsive-container ag-fresh {{unitChartGridClass}}"></ult-grid>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="container_pod_scroll" [hidden]="!showSSChart">
+                            <article class="col-md-12">
+                                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-2-{{pageUniqueKey}}" data-widget-editbutton="false" data-widget-fullscreenButton="false" style="margin: 0px; height: 400px;">
+                                    <header>
+                                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                        <h2>Selling Stores</h2>
+                                    </header>
+                                    <div class="podContainer" style="height: 375px;">
+                                        <inner-loader [options]="options.selling"></inner-loader>
+                                        <div [hidden]="sellingStoreChartContextOptions.isGrid == true || options.selling.showInnerLoader == true || options.selling.customError !=''">
+                                            <kendo-chart #sellingStoreChartObj="kendoChart" class="sellingStoreChart responsive-container {{sellingStoreChartGridClass}}" [legend]="sellingStoreChart.legend" [valueAxis]="sellingStoreChart.valueAxis" *ngIf="sellingStoreChart != undefined" (render)="sellChartRender($event)">
+                                                <kendo-chart-series>
+                                                    <kendo-chart-series-item style="smooth" *ngFor="let item of sellingStoreChart.series" [data]="sSChartData" type="line" field="{{item.field}}" name="{{item.name}}" color="{{item.color}}" categoryField="ACCOUNT">
+                                                        <kendo-chart-series-item-tooltip>
+                                                            <ng-template let-series="series" let-value="value" let-category="category">
+                                                                <div style="text-align: center;">
+                                                                    <div>{{series.name}}</div>
+                                                                    <div>{{category}}</div>
+                                                                    <div>
+                                                                        <span>{{ intl.formatNumber(value, 'n'+decimalPlaces) }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </ng-template>
+                                                        </kendo-chart-series-item-tooltip>
+                                                  </kendo-chart-series-item>
+                                                </kendo-chart-series>
+                                            </kendo-chart>
+                                            <app-context-menu *ngIf="sellingStoreChart != undefined" [contextOptions]="sellingStoreChartContextOptions" (menuSelect)="onContextMenuSelect($event)"></app-context-menu>
+                                        </div>
+                                        <ult-grid [hidden]="sellingStoreChartContextOptions.isGrid == false" [options]="sellingStoreGrid" class="sellingStoreGrid  responsive-container ag-fresh"></ult-grid>
+                                        
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="container_pod_scroll" [hidden]="!showValueChart">
+                            <article class="col-md-12">
+                                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3-{{pageUniqueKey}}" data-widget-editbutton="false" data-widget-fullscreenButton="false" style="margin: 0px; height: 400px;">
+                                    <header>
+                                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                        <h2>Value</h2>
+                                    </header>
+                                    <div class="podContainer" style="height: 375px;">
+                                        <inner-loader [options]="options.value"></inner-loader>
+                                        <div [hidden]="valueChartContextOptions.isGrid == true || options.value.showInnerLoader == true || options.value.customError !=''" class="chartContainer">
+                                            <kendo-chart *ngIf="valueChart != undefined" #valueChartObj="kendoChart" class="valueChart responsive-container {{valueChartGridClass}}"
+                                            [legend]="valueChart.legend" [valueAxis]="valueChart.valueAxis"
+                                            (render)="valueChartRender($event)">
+                                                <kendo-chart-series>
+                                                    <kendo-chart-series-item style="smooth" *ngFor="let item of valueChart.series" [data]="valueChartData" type="line" field="{{item.field}}" name="{{item.name}}" color="{{item.color}}" categoryField="ACCOUNT">
+                                                        <kendo-chart-series-item-tooltip>
+                                                            <ng-template let-series="series" let-value="value" let-category="category">
+                                                                <div style="text-align: center;">
+                                                                    <div>{{series.name}}</div>
+                                                                    <div>{{category}}</div>
+                                                                    <div>
+                                                                        <span>{{ intl.formatNumber(value, 'n'+decimalPlaces) }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </ng-template>
+                                                        </kendo-chart-series-item-tooltip>
+                                                  </kendo-chart-series-item>
+                                                </kendo-chart-series>
+                                            </kendo-chart>
+                                            <app-context-menu *ngIf="valueChart != undefined" [contextOptions]="valueChartContextOptions" (menuSelect)="onContextMenuSelect($event)"></app-context-menu>
+                                        </div>
+                                        <ult-grid [hidden]="valueChartContextOptions.isGrid == false" [options]="valueGrid" class="valueGrid responsive-container ag-fresh {{valueChartGridClass}}"></ult-grid>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </jqxSplitter>
+        </div>
+    </section>
+</div>

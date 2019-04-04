@@ -1,0 +1,27 @@
+<inner-loader [options]="options.showPodLoader"></inner-loader>
+<no-data-found [options]="options.showPODNoDataFound"></no-data-found>
+<div [hidden]="options.showPodLoader.showInnerLoader == true || options.showPODNoDataFound.showNoDataFound == true || options.ContextOptions.isGrid == true" class="chartContainer">
+    <kendo-chart class="kendochartClass {{options.ChartGridClass}}" #chartObj="kendoChart" *ngIf="totalSalesChart != undefined" 
+        [legend]="totalSalesChart.legend"
+        [title]="totalSalesChart.title"
+        [seriesDefaults]="totalSalesChart.seriesDefaults"
+        [panes]="totalSalesChart.panes"
+        [valueAxis]="totalSalesChart.valueAxis"
+        [categoryAxis]="totalSalesChart.categoryAxis"
+        [tooltip]="totalSalesChart.tooltip"
+    >
+        <kendo-chart-series>
+            <kendo-chart-series-item [data]="totalSalesDataWithSort" field="SALES" categoryField="ACCOUNT">
+                <kendo-chart-series-item-tooltip>
+                    <ng-template let-dataItem="dataItem">
+                        <div class='chartTooltipTitle'>{{dataItem.ACCOUNT}}</div><div class='chartTooltipLine'>{{dataItem.SALES | nformatter:measureDataDecimalPlaces}} {{unit}} Sales</div>
+                    </ng-template>
+                </kendo-chart-series-item-tooltip>
+            </kendo-chart-series-item>
+        </kendo-chart-series>
+    </kendo-chart>
+  <app-context-menu *ngIf="totalSalesChart != undefined" [contextOptions]="options.ContextOptions" (menuSelect)="onContextMenuSelect($event)"></app-context-menu>
+</div>
+<ult-grid [hidden]="options.showPodLoader.showInnerLoader == true || options.showPODNoDataFound.showNoDataFound == true || options.ContextOptions.isGrid == false" [options]="options.totalSalesGrid" class="totalSalesGridClass responsive-container ag-fresh"></ult-grid>
+<!-- </div> -->
+<!-- <div context-menu options="options.ContextOptions" gridcallback="fnSetGrid()" chartcallback="fnSetChart()" ></div> -->

@@ -1,0 +1,11 @@
+<div class="measureBox measureBox6">
+    <div class="measureBox-title marginBottom">
+        Measure Selection
+    </div>
+    <div class="measureBox-content">
+    	<select [(ngModel)]="selectedMeasureID" (ngModelChange)="setSelectionData()">
+    		<option *ngFor="let group of measuresOptiondata" [ngValue]="group.measureID">{{group.measureName}}</option>
+    	</select> 
+        <!-- <select ng-model="selectedMeasureID" ng-change="setSelectionData()" ng-options="group.measureID as group.measureName for group in measuresOptiondata"></select> -->
+    </div>
+</div>

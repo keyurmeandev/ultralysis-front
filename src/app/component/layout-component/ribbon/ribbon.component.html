@@ -1,0 +1,212 @@
+<span class="ribbon-button-alignment">
+	<span *ngIf="fetchProductAndMarketFilterOnTabClick == undefined || !fetchProductAndMarketFilterOnTabClick" id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-sync"></i></span>
+	<span *ngIf="fetchProductAndMarketFilterOnTabClick" id="refresh" class="btn btn-ribbon" title="refresh" (click)="reloadPage()"><i class="fa fa-sync"></i></span>
+</span>
+<div style="margin-top:-25px;margin-left:35px;font-size:11px;color:white;">{{main_page}} / {{page_title}}</div>
+<span style="margin-top:-17px;font-size:14px;color:white;font-weight:bold;float:right;">{{projectName}}</span>
+<!-- ng-controller="reloadwithfiltersController" -->
+<div style="float: right;">
+	<span style="color:white;margin-top: -19px; float: right;">
+		<a style="margin-top: -3px; display: inline-block; vertical-align: middle; cursor: pointer; color:#fff " href="javascript:void(0);" title="Manage Filters" (click)="getFilters(); openWindow();"><i class="fa fa-list" style="font-size: 14px; margin-right: 10px; "></i></a>
+	</span>				
+	<div id="cmdFilterWin">
+		<kendo-window title="Manage Filter" *ngIf="opened" (close)="closePopup()" [resizable]="false">
+			<div class="alert alert-success fade in" [hidden]="!hasSaved">
+				<button data-dismiss="alert" class="close close-sm" type="button">
+					<i class="fa fa-times"></i>
+				</button>
+				<span>{{succMsg}}</span>
+			</div>
+	        <div class="alert alert-block alert-danger fade in" [hidden]="!hasError">
+	            <button data-dismiss="alert" class="close close-sm" type="button">
+	                <i class="fa fa-times"></i>
+	            </button>
+	            <span id="errorMsg">{{errorMsg}}</span>
+	        </div>
+	        <div id="filters-list" (click)="applyFilter(filterId);" kendo-grid="grid" k-options="filtersGrid" k-rebind="filtersGrid" style="max-height: 500px; overflow: auto;"></div>
+        	<br />
+	        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+	            <li class="active"><a href="#product" data-toggle="tab">Product Filter</a></li>
+	            <li><a href="#market" data-toggle="tab">Market Filter</a></li>
+	        </ul>
+	        <div id="my-tab-content" class="tab-content">
+	            <div class="tab-pane active" id="product">
+	                <!--h1>Product Filter</h1-->
+	                      <div class="modal-custom-body"> 
+	                          <ul id="product_tabs" class="nav nav-tabs">
+	                          		<!-- href="#{{currentPageName}}_{{(obj.label).split(' ').join('')}}Filter" -->
+	                                 <li [ngClass]="currentIndex == i ? 'active' : ''" *ngFor="let obj of CMN_FILTER_productSelectionTabs;let i = index;"><a data-toggle="tab">{{obj.label|uppercase}}</a></li>
+	                          </ul>
+	                          <div class="tab-content ddbPd">
+	                                <div [ngClass]="currentIndex == i ? 'active' : ''" *ngFor="let obj of CMN_FILTER_productSelectionTabs;let i = index;" class="tab-pane">
+	                                	<section class="SFPcontainer">
+	                                		<div class="left_box">
+	                                            <input class="filterField" [(ngModel)]="FilterText" value="" placeholder="Filtering by {{obj.label|uppercase}}">
+	                                            <!-- ng-options="objData as objData.label for objData in obj.dataList | filter: {label: FilterText}" -->
+	                                            <select [(ngModel)]="obj.selectedItemLeft" size="5" multiple>
+	                                            	<option *ngFor="let objData of obj.dataList" [ngValue]="objData.label">{{objData.label}}</option>
+	                                            </select>
+	                                        </div>
+	                                        <div class="mid_box" style="padding-top: 5%;">
+	                                                <input (click)="pushAndPopItems(obj.dataList,obj.selectedItemLeft,obj.selectedDataList)" class="btn btn-primary btn-xs" type="button" value="&gt;" style="vertical-align: middle; height: 25px;width: 60%; margin: 50px 0 5px 0;"/>
+	                                                <input (click)="pushAndPopItems(obj.selectedDataList,obj.selectedItemRight,obj.dataList)" class="btn btn-primary btn-xs" type="button" value="&lt;" style="vertical-align: middle; height: 25px;width: 60%;"/>
+	                                                <input (click)="pushAndPopAllItems(obj.dataList, obj.selectedDataList)" class="btn btn-primary btn-xs" type="button" value="&gt;&gt;" style="vertical-align: middle; height: 25px;width: 60%;margin-top:5px;"/>
+	                                                <input (click)="pushAndPopAllItems(obj.selectedDataList, obj.dataList)" class="btn btn-primary btn-xs" type="button" value="&lt;&lt;" style="vertical-align: middle; height: 25px;width: 60%;margin-top:5px;"/>
+	                                        </div>
+	                                        <div class="right_box">
+	                                            <select [(ngModel)]="obj.selectedItemRight" size="5" multiple>
+	                                            	<option *ngFor="let objDataF of obj.selectedDataList" [ngValue]="objDataF.label">{{objDataF.label}}</option>
+	                                            </select>
+	                                        </div>                            
+	                                </section>
+	                                </div>
+	                          </div>                 
+	                      </div>
+	            </div>
+	            <div class="tab-pane" id="market">
+	                <!--h1>Market Filter</h1-->
+	                <div class="modal-custom-body">
+	                <ul id="market_tabs" class="nav nav-tabs">
+	                	<!-- href="#{{currentPageName}}_{{(obj.label).split(' ').join('')}}Filter" -->
+	                    <li [ngClass]="currentIndex == i ? 'active' : ''" *ngFor="let obj of CMN_FILTER_marketSelectionTabs;let i = index;"><a data-toggle="tab">{{obj.label|uppercase}}</a></li>
+	                </ul>
+	                <div class="tab-content ddbPd">
+	                     <div [ngClass]="currentIndex == i ? 'active' : ''" *ngFor="let obj of CMN_FILTER_marketSelectionTabs;let i = index;" class="tab-pane">
+	                    <section class="SFPcontainer">                   
+	                            <div class="left_box">
+	                                <input class="filterField" [(ngModel)]="FilterText" value="" placeholder="Filtering by {{obj.label|uppercase}}">
+	                                <select [(ngModel)]="obj.selectedItemLeft" size="5" multiple>
+	                                	<option *ngFor="let objData of obj.dataList;">{{objData.label}}</option>
+	                                </select>
+	                            </div>
+	                            <div class="mid_box" style="padding-top: 5%;">
+	                                    <input (click)="pushAndPopItems(obj.dataList,obj.selectedItemLeft,obj.selectedDataList)" class="btn btn-primary btn-xs" type="button" value="&gt;" style="vertical-align: middle; height: 25px;width: 60%; margin: 50px 0 5px 0;"/>
+	                                    <input (click)="pushAndPopItems(obj.selectedDataList,obj.selectedItemRight,obj.dataList)" class="btn btn-primary btn-xs" type="button" value="&lt;" style="vertical-align: middle; height: 25px;width: 60%;"/>
+	                                    <input (click)="pushAndPopAllItems(obj.dataList, obj.selectedDataList)" class="btn btn-primary btn-xs" type="button" value="&gt;&gt;" style="vertical-align: middle; height: 25px;width: 60%;margin-top:5px;"/>
+	                                    <input (click)="pushAndPopAllItems(obj.selectedDataList, obj.dataList)" class="btn btn-primary btn-xs" type="button" value="&lt;&lt;" style="vertical-align: middle; height: 25px;width: 60%;margin-top:5px;"/>											
+	                            </div>
+	                            <div class="right_box">
+	                                <select [(ngModel)]="obj.selectedItemRight" size="5" multiple>
+	                                	<option *ngFor="let objDataF of obj.selectedDataList;">{{objDataF.label}}</option>
+	                                </select>
+	                            </div>                            
+	                    </section>
+	                    </div>
+	                </div>
+	                </div>
+	            </div>
+	            <div class="modal-custom-footer">
+	              <button type="button" class="btn btn-primary" (click)="setSelectedLabel();setSelectionData('apply');">Apply Filter</button> 
+	              <button type="button" class="btn btn-primary" (click)="saveUserSelection();setSelectedLabel('save');setSelectionData();">Save Filter Selection</button>
+	              <button type="button" class="btn btn-danger" (click)="manageFilterWin.close();">Cancel</button>
+	            </div>	
+
+	            <div class="modal fade" id="save-filter-name-panel" tabindex="-1" role="dialog" aria-labelledby="storeEditModalLabel" aria-hidden="true" style="display: none;">
+	            	<div class="modal-dialog">
+	                	<div class="modal-content">
+	                    	<form (ngSubmit)="dataDownload('saveFilters')" name="filter-list">
+	                        	<div class="modal-header"style="background-color:#474544;color:#FFF">
+	                            Filter Save
+	                            	<button data-dismiss="modal" style=" color: #FFF; opacity: 1; " class="close" type="button">X</button>
+	                        	</div>
+	                        	<div class="modal-body" style=" float: left; padding: 0; width: 100%;"> 
+	                            	<div class="Panel">
+	                                	<div id="addTable" style="width: auto; height: auto; padding: 10px 20px; min-height: 46px;" closed="true" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
+	                                    	<ul class="">
+	                                        	<li style="width: 500px;list-style:none">
+	                                            	<input (change)="changeReportType()" [(ngModel)]="reportType" type="radio" value="1" name="radiocheck">
+	                                            	<i></i>
+	                                            	
+	                                            	<input (change)="changeReportType()" [(ngModel)]="reportType" type="radio" value="2" name="radiocheck"><i></i>
+	                                            	
+	                                        	</li>
+	                                        	<li style="width: 500px;list-style:none" [hidden]="reportType == 1">
+	                                           		<label style="width: 100px;padding: 5px;">Select Filter:</label>
+	                                           		<select style=" background: white; color: black; margin-right: 15px; " name="fiiler_id" id="fiiler_id" [(ngModel)]="fiiler_id">
+	                                           			<option value="">-- Select One --</option>
+	                                           			<option *ngFor="let filterId of savedFilters"></option>
+	                                            	</select>
+	                                            	<span class="error_label" [hidden]="select_error">{{selectErrorMsg}}</span>
+	                                        	</li>
+	                                        	<li style="width: 500px;list-style:none" [hidden]="reportType == 2">
+	                                           		<label style="width: 100px;padding: 5px;">Filter Name:</label>
+	                                           		<input [(ngModel)]="filter_name" id="filter_name" name="filter_name" type="text" required />
+	                                           		<span class="error_label" [hidden]="name_error">{{errorMsg}}</span>
+	                                        	</li>
+	                                    	</ul>
+	                               		</div>
+	                            	</div>
+	                        	</div>
+	                        	<div class="modal-footer"style="background-color:#474544;color:#FFF">
+	                            	<button type="submit" style="margin-top:10px;" class="btn btn-primary">Continue</button>  
+	                            	<button type="button" style="margin-top:10px;" class="btn btn-danger" data-dismiss="modal">Close</button> 
+	                        	</div>
+	                    	</form>
+	                	</div>
+	            	</div>
+	        	</div>
+	        	<div class="modal fade" id="report-edit-form-panel" tabindex="-1" role="dialog" aria-labelledby="reportEditFormPanel" aria-hidden="true" style="display: none;">
+	            	<div class="modal-dialog">
+	                	<div class="modal-content">
+	                    	<form (ngSubmit)="editFilterName()" name="filter-form">
+		                        <div class="modal-header"style="background-color:#474544;color:#FFF">
+		                            Edit Filter
+		                            <button (click)="cancelEditFilter()" style=" color: #FFF; opacity: 1; " class="close" type="button">X</button>
+		                        </div>
+		                        <div class="modal-body" style=" float: left; padding: 0; width: 100%;"> 
+		                            <div class="Panel">
+		                                <div style="width: auto; height: auto; padding: 10px 20px; min-height: 46px;" closed="true" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
+		                                    <div class="alert alert-block alert-danger fade in" [hidden]="nameChangeHasError">
+		                                        <button data-dismiss="alert" class="close close-sm" type="button">
+		                                            <i class="fa fa-times"></i>
+		                                        </button>
+		                                        <span id="errorMsg">{{filterNameChangeError}}</span>
+		                                    </div>
+		                                    <ul class="">
+		                                        <li style="width: 500px;list-style:none">
+		                                            <input [(ngModel)]="edit_filter_id" name="edit_filter_id" type="hidden" />
+		                                            <label style="width: 100px;padding: 5px;">Filter Name:</label>
+		                                            <input [(ngModel)]="edit_filter_name" name="edit_filter_name" type="text" required />
+		                                        </li>
+		                                    </ul>
+		                               </div>
+		                            </div>
+		                        </div>
+		                        <div class="modal-footer"style="background-color:#474544;color:#FFF">
+		                            <button type="submit" class="btn btn-primary" style="margin-top:10px">Save</button>  
+		                            <button type="button" class="btn btn-danger" (click)="cancelEditFilter()" style="margin-top:10px">Cancel</button> 
+		                        </div>  
+	                    	</form>
+	                	</div>
+	            	</div>
+	        	</div>
+	        	<div class="modal fade" id="filter-delete-panel" tabindex="-1" role="dialog" aria-labelledby="filterDeletePanel" aria-hidden="true" style="display: none;">
+		            <div class="modal-dialog">
+		                <div class="modal-content">
+		                    <div class="modal-header"style="background-color:#474544;color:#FFF">
+		                        Delete Filter
+		                        <button (click)="cancelDeleteFilter()" style=" color: #FFF; opacity: 1; " class="close" type="button">X</button>
+		                    </div>
+		                    <div class="modal-body" style=" float: left; padding: 0; width: 100%;"> 
+		                        <div id="addTable" style="width: auto; height: auto; padding: 10px 20px; min-height: 46px;" closed="true" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
+		                            <input [(ngModel)]="delete_filter_id" name="delete_filter_id" type="hidden" />
+		                            <div class="panel">
+		                                Are you sure you want to delete "{{delete_filter_name}}" filter?
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="modal-footer"style="background-color:#474544;color:#FFF">
+		                        <button type="submit" class="btn btn-primary" (click)="removeFilter()" style="margin-top:10px">Yes</button>  
+		                        <button type="button" class="btn btn-danger" (click)="cancelDeleteFilter()" style="margin-top:10px">No</button> 
+		                    </div>  
+		                </div>
+		            </div>
+	        	</div>
+	        </div>
+		</kendo-window>
+	</div>
+</div>
+<select [hidden]="!hasGlobalFilter" style="font-size:12px;float: right; margin-top: -16px; margin-right: 10px;" (change)="changeGlobalFilter();" [(ngModel)]="selectedGlobalFilter">
+ <option value="ALL" [selected]="selectedGlobalFilter == 'ALL'">ALL</option>
+ <option *ngFor="let filterData of globalFilterData" [ngValue]="filterData.data">{{filterData.label}}</option>
+</select>

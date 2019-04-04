@@ -1,0 +1,81 @@
+<div [hidden]="!timeSelectionStyle" *ngIf="timeSelectionStyle == 'DROPDOWN'" class="measureBox measureBox6">
+    <div class="measureBox-title" (click)="setTimeSelectionModuleWidth();open()">
+        Time Selection
+        <span><i class="fa fa-filter"></i></span>
+    </div>
+    <div class="measureBox-content" [hidden]="showDateInWeeks">
+        <p [hidden]="showLyRangeTextInTimeSelection">From: {{selectedTYWeekYearFrom}} To: {{selectedTYWeekYearTo}}</p>
+        <p [hidden]="!showLyRangeTextInTimeSelection">From: {{selectedTYWeekYearFrom}} To: {{selectedTYWeekYearTo}} VS</p>
+        <p [hidden]="!showLyRangeTextInTimeSelection">From: {{selectedLYWeekYearFrom}} To: {{selectedLYWeekYearTo}}</p>
+    </div>
+	<div class="measureBox-content" [hidden]="!showDateInWeeks">
+        <p [hidden]="showLyRangeTextInTimeSelection">From: {{selectedTYWeekYearFromLabel}} To: {{selectedTYWeekYearToLabel}}</p>
+        <p [hidden]="!showLyRangeTextInTimeSelection">From: {{selectedTYWeekYearFromLabel}} To: {{selectedTYWeekYearToLabel}} VS</p>
+        <p [hidden]="!showLyRangeTextInTimeSelection">From: {{selectedLYWeekYearFromLabel}} To: {{selectedLYWeekYearToLabel}}</p>
+    </div>
+</div>
+
+<div [hidden]="timeSelectionStyle" *ngIf="timeSelectionStyle == 'DROPDOWN'" class="measureBox measureBox6">
+    <div class="measureBox-title marginBottom">
+        Time Selection
+        <span><i class="fa fa-filter"></i></span>
+    </div>
+    <select (ngModelChange)="setTimeSelectionDD()" [(ngModel)]="selectedTimeSelection" style="width:100%;"> 
+        <option *ngFor="let c of timeSelectionStyleDDArray" [ngValue]="c">{{c}}</option>
+    </select>
+</div>
+<!--div [hidden]="GLOBALS.timeSelectionUnit == 'seasonal' && showFacingsSelection" class="measureBox measureBox6" style="width: 9%;">
+    <div class="measureBox-title marginBottom">Phasing Days</div>
+    <div class="measureBox-content">
+        <select name="selectedFacing" [(ngModel)]="selectedFacing"  class="col-sm-12" (ngModelChange)="changeFacingsSelection()">
+            <option *ngFor="let c of facingSelection" [ngValue]="c">{{c}}</option>
+        </select>
+    </div>
+</div-->
+<!-- kendo-window="timeSelectionWindow" -->
+<div id="timeSelectionWindow">
+    <div class="blackOverlay" *ngIf="opened">&nbsp;</div>
+    <kendo-window title="Time Selection" [(width)]="timeSelectionModalWidth" [resizable]="false" [draggable]="false" *ngIf="opened" (close)="close()" class="k-window">
+        <div class="timeSelectionTextRow">Week 1 is the Customer Week 1. Corresponding calendar dates are shown bellow.</div>
+        <div class="timeSelectionTextRow">        
+            From
+            <!-- ng-options="yeekYear.label for yeekYear in weekYearListArray" -->
+            <!-- (ngModelChange)="onChangeYearFrom($event)" (change)="changeFromMonthYear();" -->
+            <select id="{{randomId}}_weekYearListFrom" [ngModel]="selectedWeekYearFrom" (ngModelChange)="onChangeYearFrom($event);" >
+                <option *ngFor="let year of weekYearListArray; let i = index" [ngValue]="year">{{year.label}}</option>
+            </select>
+            To
+            <!-- ng-options="yeekYear.label for yeekYear in weekYearListArray" -->
+            <!--(ngModelChange)="onChangeYearTo($event)" (change)="changeToMonthYear();" -->
+            <select id="{{randomId}}_weekYearListTo" [ngModel]="selectedWeekYearTo" (ngModelChange)="onChangeYearTo($event);" >
+                <option *ngFor="let year of weekYearListArray; let i = index" [ngValue]="year">{{year.label}}</option>
+            </select>
+        </div>
+        <div *ngIf="timeSelectionUnit != 'weekMonth'" class="timeSelectionTextRow">
+            <button kendoButton name="ytdWeek" (click)="calculateWeekYearList('reset');" >YTD</button>
+            <button kendoButton name="lastWeek" (click)="calculateWeekYearList(1);" >Latest Week</button>
+            <button kendoButton name="fourWeek" (click)="calculateWeekYearList(4)">Latest 4 Weeks</button>
+            <button kendoButton name="thirteenWeek"  (click)="calculateWeekYearList(13)">Latest 13 Weeks</button>
+            <button kendoButton name="fiftyTwoWeek"  (click)="calculateWeekYearList(52)">Latest 52 Weeks</button>
+            <button kendoButton name="xmasWeek" [hidden]="!showXmasWeeks" (click)="calculateWeekYearList('xmas')">Xmas Weeks</button>
+        </div>
+        <div *ngIf="timeSelectionUnit == 'weekMonth'" class="timeSelectionTextRow">
+            <button kendoButton name="ytdMonth" (click)="calculateWeekYearList('reset');" >YTD</button>
+            <button kendoButton name="oneMonth" (click)="calculateWeekYearList(1)">Latest Month</button>
+            <button kendoButton name="threeMonth"  (click)="calculateWeekYearList(3)">Latest 3 Months</button>
+            <button kendoButton name="twelveMonth"  (click)="calculateWeekYearList(12)">Latest 12 Months</button>
+        </div>
+        <div *ngIf="timeSelectionUnit == 'weekMonth'" class="timeSelectionTextRow"><span>W/E {{selectedWeekYearFrom.label}}</span><span> to </span><span>W/E {{selectedWeekYearTo.label}}</span></div>
+        <div  class="timeSelectionTextRow" [hidden]="!showVsDropdown">
+             <select [(ngModel)]="timeSelectionMode">
+                <option value="1">VS Last Year</option>
+                <option value="2">VS Previous Period</option>
+             </select>         
+        </div>
+
+        <div  class="timeSelectionTextRow">
+            <button kendoButton (click)="setSelectedLabel();setSelectionData();close();" name="timeSelectionOk" >Ok</button>
+            <button kendoButton (click)="doBeforeCancel();close();" name="timeSelectionCancel">Cancel</button>
+        </div>
+    </kendo-window>
+</div>

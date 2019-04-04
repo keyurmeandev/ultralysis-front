@@ -1,0 +1,17 @@
+<div [hidden]="!options.customError" class="podLoader responsive-container" style="min-height: 100px;">
+    <div class="">
+        <div id="msgbox" class="alert alert-block alert-danger fade in" style="margin-bottom:18px;text-align: start;">
+            <span id="errorLoginMsg" class="ng-binding">{{options.customError}}</span>
+        </div>
+    </div>
+</div>
+<div [hidden]="!options.showInnerLoader || options.customError != ''" class="podLoader responsive-container" style="min-height: 100px;">
+    <div class="pace pace-active">
+        <div class="pace-progress progress">
+            <div class="pace-progress-inner ng-scope"></div>
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="pace-activity"></div>
+    </div>
+</div>

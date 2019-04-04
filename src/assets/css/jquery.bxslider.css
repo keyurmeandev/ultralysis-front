@@ -1,0 +1,272 @@
+/**
+ * BxSlider v4.0 - Fully loaded, responsive content slider
+ * http://bxslider.com
+ *
+ * Written by: Steven Wanderski, 2012
+ * http://stevenwanderski.com
+ * (while drinking Belgian ales and listening to jazz)
+ *
+ * CEO and founder of bxCreative, LTD
+ * http://bxcreative.com
+ */
+
+
+/** RESET AND LAYOUT
+===================================*/
+
+.bx-wrapper {
+	position: relative;
+	margin: 0 auto 0px;
+	padding: 0;
+	*zoom: 1;
+}
+
+.bx-wrapper img {
+	max-width: 100%;
+	display: block;
+}
+
+/** THEME
+===================================*/
+
+.bx-wrapper .bx-viewport {
+	/*-moz-box-shadow: 0 0 5px #ccc;
+	-webkit-box-shadow: 0 0 5px #ccc;
+	box-shadow: 0 0 5px #ccc;
+	border: solid #fff 5px;
+	left: -5px;
+	background: #fff;*/
+	
+}
+
+
+
+/*///////////////////////////////////////*/
+
+
+.bx-controls {
+    background:#F5F5F5;
+	border-top:1px solid #ddd;
+    float: left;
+    padding: 5px 20px 0;
+    width: 100%;
+}
+
+.bx-pager { display:none;}
+
+.bx-controls a {
+    background: none repeat scroll 0 0 #428BCA;
+    border: 1px solid #357EBD;
+    box-shadow: 0 1px 5px #1E83A1 inset;
+    color: #FFFFFF;
+    cursor: pointer;
+    height: auto !important;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+
+.bx-controls .bx-prev { float:left;}
+.bx-controls .bx-next { float:right;}
+
+
+
+
+.bx-wrapper .bx-pager,
+.bx-wrapper .bx-controls-auto {
+	position: absolute;
+	bottom: -30px;
+	width: 100%;
+}
+
+/* LOADER */
+
+.bx-wrapper .bx-loading {
+	min-height: 50px;
+	background: #fff;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2000;
+}
+
+/* PAGER */
+
+.bx-wrapper .bx-pager {
+	text-align: center;
+	font-size: .85em;
+	font-family: Arial;
+	font-weight: bold;
+	color: #666;
+	padding-top: 20px;
+}
+
+.bx-wrapper .bx-pager .bx-pager-item,
+.bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+}
+
+.bx-wrapper .bx-pager.bx-default-pager a {
+	background: #666;
+	text-indent: -9999px;
+	display: block;
+	width: 10px;
+	height: 10px;
+	margin: 0 5px;
+	outline: 0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.bx-wrapper .bx-pager.bx-default-pager a:hover,
+.bx-wrapper .bx-pager.bx-default-pager a.active {
+	background: #000;
+}
+
+.bx-wrapper .bx-controls-direction a.disabled {
+	display: none;
+}
+
+
+
+/* AUTO CONTROLS (START / STOP) */
+
+.bx-wrapper .bx-controls-auto {
+	text-align: center;
+}
+
+.bx-wrapper .bx-controls-auto .bx-start {
+	display: block;
+	text-indent: -9999px;
+	width: 10px;
+	height: 11px;
+	outline: 0;
+	background: #fff;
+	margin: 0 3px;
+}
+
+.bx-wrapper .bx-controls-auto .bx-start:hover,
+.bx-wrapper .bx-controls-auto .bx-start.active {
+	background-position: -86px 0;
+}
+
+.bx-wrapper .bx-controls-auto .bx-stop {
+	display: block;
+	text-indent: -9999px;
+	width: 9px;
+	height: 11px;
+	outline: 0;
+	background: #fff;
+	margin: 0 3px;
+}
+
+.bx-wrapper .bx-controls-auto .bx-stop:hover,
+.bx-wrapper .bx-controls-auto .bx-stop.active {
+	background-position: -86px -33px;
+}
+
+/* PAGER WITH AUTO-CONTROLS HYBRID LAYOUT */
+
+.bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {
+	text-align: left;
+	width: 80%;
+}
+
+.bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto {
+	right: 0;
+	width: 35px;
+}
+
+/* IMAGE CAPTIONS */
+
+.bx-wrapper .bx-caption {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: #666\9;
+	background: rgba(80, 80, 80, 0.75);
+	width: 100%;
+}
+
+.bx-wrapper .bx-caption span {
+	color: #fff;
+	font-family: Arial;
+	display: block;
+	font-size: .85em;
+	padding: 10px;
+}
+
+.wrapperDDB { width:100%; margin:0 auto;}
+
+.containerDDB { width:100%; float:left; border:1px solid #000;}
+
+.inrow { margin-bottom: 10px;}
+
+.Panel { width:100%; height:auto; float:left; color:#000;}
+
+.Panel .Plabel { width:140px; text-align:right; display:inline-block; color:#000;}
+
+
+.PanelTitle { width: 100%; float: left;  padding: 3px 10px; background:#cfcfcf; border-bottom:1px solid #b4b4b4; margin:0; color:#000;}
+
+.PanelCaption { width: 100%; float: left; font-size: 14px; padding:3px 10px; background:#dcdcdc; text-align:center; margin:0; color:#000;}
+
+.Panel .contentDDB { width:100%; float:left; padding:20px 2%; color:#000;}
+
+.Panel .contentDDB p { color:#000; margin-bottom:10px;}
+
+
+
+.bs-row { width:20%; float:left; margin-left:10%;}
+.bs-row h4 { margin-bottom:10px; margin:0;}
+
+
+
+
+.footer-content { width:100%; float:left; padding:5px 2% 10px; background:#F5F5F5;}
+
+
+.navigation { width:100%; float:left;}
+.PreBtn { float:left;}
+.NextBtn { float:right;}
+
+.genarate-report { width:100%; float:left; text-align:center;}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br { border:none!important;}
+.ui-widget-header { background:#f5f5f5!important;}
+.ui-tabs .ui-tabs-nav li.ui-tabs-active { padding-bottom:0px!important;}
+
+
+#__full_container option { padding:0 5px;}
+.ddbPd { padding-top: 10px;}
+.ddbText {
+	    width: 160px;
+	    box-sizing: border-box;
+}
+
+.SFPcontainer { width:100%;}
+
+.SFPcontainer .left_box { width:45%; float: left;}
+.SFPcontainer .left_box select { width:100%; height:225px;}
+.SFPcontainer .mid_box { width:10%; float: left; padding-top:10%; text-align: center;}
+.SFPcontainer .right_box { width:45%; float: right;}
+.SFPcontainer .right_box select { width:100%; height:250px;}		
+
+.leftMeasureGroup { float: left; width:100%; border:1px solid #999; margin-bottom: 2px; padding: 2px 5px;}
+
+/* PROGRESS BAR START*/
+#progressor { z-index: 10000;  text-align: center; background: #555; width: 100%; height: 25px; float: left; position: relative; }
+#progressor #percent { position: relative; z-index: 100; text-align: center; color: #fff; margin-top: 5px; }
+#progressor #progressorBar { background:#3c763d; float: left; height: 100%; position: absolute; top: 0; left: 0; 
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-size: 20px 20px;
+    animation: 2s linear 0s normal none infinite running progress-bar-stripes;
+    -moz-animation: 2s linear 0s normal none infinite running progress-bar-stripes;
+    -webkit-animation: 2s linear 0s normal none infinite running progress-bar-stripes;
+}
+/* PROGRESS BAR END*/

@@ -1,0 +1,295 @@
+.positiveTextColor{ color: #00B050; }
+.negativeTextColor{ color: #9C0006; }
+.checkboxHt{
+    height:18px;
+    width: 18px;
+}
+.k-grid tr:hover { background: #d8550a; color: #fff; }
+
+.whiteLink {color: #fff;}
+.filterIconSpan  a:hover {color: #3276b1;}
+.filterBox  {font-size: 10px;}
+
+/* [START] INLINE Filters Common CSS */
+.filterIconSpan{
+    padding-right:4px;
+}
+.filterField{
+    height:18px;
+}
+.filterTextBoxDv{
+    margin: -21px 4px 2px 0px; 
+    font-size: 12px; 
+    margin-top: -21px; 
+    background-color: white; 
+    position: absolute; 
+    width: 97.2%;
+}
+.fullscreen{
+    z-index: 99999;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color:white;
+}
+.fullscreen .measureBox-title{
+    padding: 2px 4px;
+    font-size: 18px;
+    display: block;
+    background: #344e6f;
+    color: #eee;
+    cursor: pointer;
+}
+.fullscreen .measureBox-content{
+    height: 100%;
+    display: inline;
+}
+.fullscreen .clsMeasureFilter{
+    height: 100%;
+}
+.fullscreen .filterTextBoxDv{
+    margin-top: -30px;
+    width: 99.5%;
+}
+.fullscreen .filterField{
+    height: 28px;
+    width: 98%;
+}
+.fullscreen .filterIconSpan{
+    padding-right:6px;
+    font-size: 20px;
+}
+.fullscreen .filterBox{
+    font-size: 12px;
+}
+
+.barlittle {
+    background-color:#2187e7;  
+    background-image: -moz-linear-gradient(45deg, #2187e7 25%, #a0eaff); 
+    background-image: -webkit-linear-gradient(45deg, #2187e7 25%, #a0eaff);
+    border-left:1px solid #111; border-top:1px solid #111; border-right:1px solid #333; border-bottom:1px solid #333; 
+    width:10px;
+    height:10px;
+    float:left;
+    margin-left:5px;
+    opacity:0.1;
+    -moz-transform:scale(0.7);
+    -webkit-transform:scale(0.7);
+    -moz-animation:move 1s infinite linear;
+    -webkit-animation:move 1s infinite linear;
+}
+#block_1{
+    -moz-animation-delay: .4s;
+    -webkit-animation-delay: .4s;
+ }
+#block_2{
+    -moz-animation-delay: .3s;
+    -webkit-animation-delay: .3s;
+}
+#block_3{
+    -moz-animation-delay: .2s;
+    -webkit-animation-delay: .2s;
+}
+#block_4{
+    -moz-animation-delay: .3s;
+    -webkit-animation-delay: .3s;
+}
+#block_5{
+    -moz-animation-delay: .4s;
+    -webkit-animation-delay: .4s;
+}
+@-moz-keyframes move{
+    0%{-moz-transform: scale(1.2);opacity:1;}
+    100%{-moz-transform: scale(0.7);opacity:0.1;}
+}
+@-webkit-keyframes move{
+    0%{-webkit-transform: scale(1.2);opacity:1;}
+    100%{-webkit-transform: scale(0.7);opacity:0.1;}
+}
+/* [END] INLINE Filters Common CSS */
+
+.pageLoading { 
+    background-image: url(/assets/img/ajax-filter-loader.gif); 
+    width: 48px; 
+    height: 48px; 
+    position: absolute; 
+    z-index: 99; 
+    top: 40%; 
+    left: 20%; 
+}
+
+#left-panel {
+    z-index: 10003;
+}
+
+#header {
+    z-index: 10004;
+}
+
+.customErrOverflowHide {
+    overflow: hidden;
+}
+
+/* PERFORMANCE FLASH */
+
+.pfp .k-colorpicker {
+    width: 150px;
+    margin-top: -5px;
+    margin-left: 10px;
+}
+
+.pfp .k-selected-color {
+    width: 100%;
+}
+
+.pfp .k-colorpicker .k-selected-color {
+    height: 2.1em;
+    width: 100%;
+}
+
+.pfp .chartOptActive { border-top: black 2px solid; cursor: initial; }
+
+.pfp .k-grid td {
+    line-height: 2.3em;
+    border-bottom: #D1D3DF 1px solid;
+    border-left: 0;
+}
+
+.pfp div.k-grid-header th.k-header, .pfp tr.k-filter-row>th {
+    background-color: #fff;
+    border: 0;
+}
+
+.pfp .k-grid-header th.k-header, .pfp .k-filter-row th {
+    background-color: #fff;
+    border-left: 0;
+}
+
+.pfp .k-grouping-row td, .pfp .k-group-footer td, .pfp .k-grid-footer td {
+    background-color: #fff;
+}
+
+.pfp .smart-form .btn {
+    padding: 5px;
+    background-color: black;
+    color: #fff;
+    min-width: 70px;
+}
+
+.pfp .btn-group>.btn.active, .pfp .btn-group>.btn:hover {
+    background-color: gray;
+}
+
+.pfp #chartColumnContainer .k-chart {
+    width: 100%;
+    height: 400px;
+}
+
+.pfp #chartContainer .k-chart {
+    width: 100%;
+    height: 700px;
+}
+
+.pfp .inner-content {
+    position: absolute;
+    top: 50%;
+    left: 46%;
+    width: 150px;
+    height: auto;
+    margin-left: -50px;
+    font-size: 20px;
+    vertical-align: middle;
+    text-align: center;
+    color: black;
+}
+
+.pfp .k-grid-header th.k-header>.k-link {
+    font-size: 12px;
+}
+
+.pfp .btn-default.active, .btn-default:active, .pfp .btn-default:focus, .pfp .btn-default:hover, .pfp .open>.dropdown-toggle.btn-default, .pfp .btn-default{
+   border-color: transparent;
+}
+
+.pfp .k-alt, .pfp .k-separator, .pfp .k-pivot-layout>tbody>tr:first-child>td:first-child {
+    background-color: transparent;
+}
+
+.pfp .k-grouping-row td, .pfp .k-group-footer td, .pfp .k-grid-footer td {
+    border-bottom: none;
+}
+
+.pfp .k-state-selected {
+    color: #fff;
+    background-color: #3F4359;
+    border-color: #3F4359;    
+}
+
+.pfp .k-grid tr:hover{
+    background: #3F4359;
+}
+
+.podOneClassNormal {
+    height: 100%; min-height: 700px; border-right: #fff 2px solid;  float: left; background-color: #fff;
+}
+
+.podTwoClassNormal {
+    height: 100%; min-height: 700px; border-left: #fff 2px solid;  float: left;
+}
+
+.podTwoClass {
+    height: 100%; min-height: 700px; border-left: #fff 2px solid;  float: right;
+}
+
+.podThreeClassNormal {
+    background-color: #fff; min-height: 400px; border-top: #fff 2px solid; width:100%; float: left;
+}
+
+.podThreeClass {
+    background-color: #fff; min-height: 400px; border-top: #fff 2px solid; float: left; margin-top: 20px;
+}
+
+/* PERFORMANCE FLASH */
+.stickyActive { position: relative; }
+.stickyActive span{ position: absolute; z-index: 9; top: 0; left: 0; right: 0; bottom: 0; }
+.stickyNote {clear: both; padding: 0 1%; color: red;}
+.blink {animation: blink 1s linear infinite;}
+
+div.k-window , .modal{ z-index: 10007 !important;}
+.k-overlay , .modal-backdrop { z-index: 10006 !important;}
+
+.lockFilterScreen { width: 100%; height: 100%; position: absolute; top: 0; bottom: 0; right: 0; left: 0; z-index: 9999; background: none; cursor: progress; }
+
+.pfp  #chartColumn > svg > g > g > g > text { /* text-shadow: 1px 1px 10px #fff, 1px 1px 10px #fff; */ stroke: #fff; stroke-width: 0.3px; }
+
+.greenSpan { background-color: #86C67C;  color: #fff; width: 100%; height: 100%; display: inline-block; }
+.redSpan { background-color: #ff6666;  color: #fff; width: 100%; height: 100%; display: inline-block; }
+.orangeSpan { background-color: #ffc966;  color: #fff; width: 100%; height: 100%; display: inline-block; }
+.ag-cell > span { width: 100%; height: 100%; display: inline-block; }
+
+.k-window { z-index: 10006 !important; }
+.blackOverlay { width: 100%; height: 100%; position: fixed; z-index: 10005; background: black; opacity: 0.5; top: 0; left:0; }
+.nav-tabs > li > a { font-size: 12px; padding: 9px 10px 10px; }
+.stickyActive span {position: absolute; z-index: 9; top: 0; left: 0; right: 0; bottom: 0;}
+
+/* excel pos tracker */
+.headerBgTop {
+    background: #ABB4B5; 
+    white-space: normal; 
+    text-align: center;
+}
+.excelPosTrackerPage .ag-header-group-cell-label { 
+    font-size: 9px !important; 
+    display: inline;
+}
+
+.excelPosTrackerPage .ag-theme-fresh .ag-header-group-cell-label span {
+    float:none!important;
+}
+
+.menu-on-top nav ul ul li a:hover, .menu-on-top nav ul ul li:hover > a, .menu-on-top nav ul ul ul li a:hover {
+    background-color: #4c4f53;
+    color: #fff!important;
+}

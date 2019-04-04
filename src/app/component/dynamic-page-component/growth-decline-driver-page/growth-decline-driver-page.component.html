@@ -1,0 +1,159 @@
+<div id="page-{{pageID}}">
+    <section id="widget-grid-{{pageUniqueKey}}" class="{{pageUniqueKey}}_growthDeclineDriversPage">
+        <div>
+            <jqxSplitter width="100%" height="625" [orientation]="'horizontal'" [panels]="[{ size: '45%' }, { size: '55%' }]" class="splitter" id="{{pageUniqueKey}}_splitContainerGrowthDeclineDrivers">
+                <div>
+                    <jqxSplitter width="100%" height="100%" [panels]="[{ size: '20%' }]" [orientation]="'vertical'"  class="splitter" id="{{pageUniqueKey}}_splitterContainerGrowthDeclineDrivers">
+                        <div class="selectionPart" style="width:20%;">
+                            <div id="{{pageUniqueKey}}FilterContainer">
+                                <div [ngClass]="measurePositionClass" class="measureBoxs">
+                                    <time-selection #timeselectionCall (selectionDataEvent)="setSelectionData('');" id="timeSelection" [hidden]="showTimeSelection == false"></time-selection>
+                                    <product-selection #productselectionCall (selectionDataEvent)="setSelectionData('');"
+                                    id="productSelection" isShowProductFilter="isShowProductFilter"></product-selection>
+                                    <market-selection #marketselectionCall  (selectionDataEvent)="setSelectionData('');" id="marketSelection"></market-selection>
+                                    <div class="measureBox measureBox6">
+                                        <div class="measureBox-title marginBottom">
+                                            Hide Private Label
+                                        </div>
+                                        <div class="measureBox-content">
+                                            <input type="checkbox" [checked]="isCheckedPrivateLabel != undefined ? isCheckedPrivateLabel : true" [(ngModel)]="hidePrivateLabel" (change)="changeHidePrivateLabel()" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="responsive-container">
+                        	<div class="responsive-container grothDeclineTops">
+    	                            <div style="text-align: center; text-decoration: underline; font-family: Arial,Helvetica,sans-serif; font-weight: bold; height: 8%; margin-top: 5px;">Distribution Count</div>
+    	                            <inner-loader [options]="options.showPodLoader.countChart"></inner-loader>
+    	                            <div [hidden]="options.showPodLoader.countChart.showInnerLoader" style="height: 92%" >
+    	                            	<kendo-chart *ngIf="distributionCountChart != undefined" class="distributionCountChart distributionCountContextMenu responsive-container" #distributionCountChartObj="kendoChart"
+                                        (render)="distributionCountChartRender($event)"
+                                        [title]="distributionCountChart.title"
+                                        [legend]="distributionCountChart.legend"
+                                        [seriesDefaults]="distributionCountChart.seriesDefaults"
+                                        [categoryAxis]="distributionCountChart.categoryAxis"
+                                        [valueAxis]="distributionCountChart.valueAxis">
+                                            <kendo-chart-axis-defaults [line]="{ color: 'grey' }">
+                                                <kendo-chart-axis-defaults-labels>
+                                                </kendo-chart-axis-defaults-labels>
+                                            </kendo-chart-axis-defaults>
+                                            <kendo-chart-series>
+                                                <kendo-chart-series-item categoryField="account" *ngFor="let item of distributionCountChart.series" [data]="discountChart" field="{{item.field}}" color="{{item.color}}" spacing="{{item.spacing}}"  type="column" >  
+                                                  <kendo-chart-series-item-tooltip>
+                                                    <ng-template let-series="series" let-value="value" let-category="category">
+                                                        <div style="text-align: center;">
+                                                            <div class="chartTooltipTitle">{{category}}</div>
+                                                            <div class='chartTooltipLine'><span>{{ intl.formatNumber(value, '#,##0.') }}</span></div>
+                                                        </div>
+                                                    </ng-template>
+                                                </kendo-chart-series-item-tooltip>
+                                                </kendo-chart-series-item>
+                                            </kendo-chart-series>
+                                        </kendo-chart>
+                                        <app-context-menu *ngIf="distributionCountChart != undefined" [contextOptions]="distributionCountContextMenuOptions" (menuSelect)="onContextMenuSelect($event)"></app-context-menu>
+    	                            </div>
+	                        </div>
+	                        <div class="responsive-container grothDeclineTops">
+	                            <div style="text-align: center; text-decoration: underline; font-family: Arial,Helvetica,sans-serif; font-weight: bold; height: 8%; margin-top: 5px;">Average Price</div>
+	                            <inner-loader [options]="options.showPodLoader.priceChart"></inner-loader>
+	                            <div [hidden]="options.showPodLoader.priceChart.showInnerLoader" style="height: 92%" class="averagePriceChart averagePriceChartContextMenu">
+	                            	<kendo-chart *ngIf="averagePriceChart != undefined" class=" {{priceChartGridClass}} kendochartClass" #averagePriceChartObj="kendoChart"
+                                    (render)="averagePriceChartRender($event)" 
+                                    [title]="averagePriceChart.title"
+                                    [valueAxis]="averagePriceChart.valueAxis"
+                                    [legend]="averagePriceChart.legend"
+                                    [seriesDefaults]="averagePriceChart.seriesDefaults"
+                                    [categoryAxis]="averagePriceChart.categoryAxis">
+                                        <kendo-chart-axis-defaults [line]="{ color: 'grey' }">
+                                            <kendo-chart-axis-defaults-labels>
+                                            </kendo-chart-axis-defaults-labels>
+                                        </kendo-chart-axis-defaults>
+                                        <kendo-chart-series>
+                                            <kendo-chart-series-item [data]="averageChart" field="{{item.field}}" categoryField="account" *ngFor="let item of averagePriceChart.series" color="{{item.color}}" spacing="{{item.spacing}}" type="column">
+                                                <kendo-chart-series-item-tooltip>
+                                                    <ng-template let-series="series" let-value="value" let-category="category">
+                                                        <div style="text-align: center;">
+                                                            <div class="chartTooltipTitle">{{category}}</div>
+                                                            <div class='chartTooltipLine'><span>{{value}}</span></div>
+                                                        </div>
+                                                    </ng-template>
+                                                </kendo-chart-series-item-tooltip>
+                                            </kendo-chart-series-item>
+                                        </kendo-chart-series>
+                                    </kendo-chart>
+                                    <app-context-menu *ngIf="averagePriceChart != undefined" [contextOptions]="averagePriceChartContextMenuOptions" (menuSelect)="onContextMenuSelect($event)"></app-context-menu>
+	                            </div>
+	                        </div>
+	                        <div class="responsive-container grothDeclineTops">
+	                            <div style="text-align: center; text-decoration: underline; font-family: Arial,Helvetica,sans-serif; font-weight: bold; height: 8%; margin-top: 5px;">Unit Sales</div>
+	                            <inner-loader [options]="options.showPodLoader.salesChart"></inner-loader>
+	                            <div [hidden]="options.showPodLoader.salesChart.showInnerLoader" style="height: 92%" class="unitSalesChart unitSalesChartContextMenu responsive-container">
+                                    <kendo-chart *ngIf="unitSalesChart != undefined" class=" {{priceChartGridClass}} kendochartClass" #unitSalesChartObj="kendoChart"
+                                    (render)="unitChartRender($event)"  
+                                    [title]="unitSalesChart.title"
+                                    [valueAxis]="unitSalesChart.valueAxis"
+                                    [legend]="unitSalesChart.legend"
+                                    [seriesDefaults]="unitSalesChart.seriesDefaults"
+                                    [categoryAxis]="unitSalesChart.categoryAxis"
+                                    [series]="unitSalesChart.series">
+                                        <kendo-chart-axis-defaults [line]="{ color: 'grey' }">
+                                            <kendo-chart-axis-defaults-labels>
+                                            </kendo-chart-axis-defaults-labels>
+                                        </kendo-chart-axis-defaults>
+                                        <kendo-chart-series>
+                                            <kendo-chart-series-item  *ngFor="let item of unitSalesChart.series" [data]="salesChart" field="{{item.field}}" name="{{item.name}}" color="{{item.color}}" categoryField="account" spacing="{{item.spacing}}" type="column">
+                                                <kendo-chart-series-item-tooltip>
+                                                    <ng-template let-series="series" let-value="value" let-category="category">
+                                                        <div style="text-align: center;">
+                                                            <div class="chartTooltipTitle">{{category}}</div>
+                                                            <div class='chartTooltipLine'><span>{{ intl.formatNumber(value, '#,##0.') }}</span></div>
+                                                        </div>
+                                                    </ng-template>
+                                                </kendo-chart-series-item-tooltip>
+                                            </kendo-chart-series-item>
+                                        </kendo-chart-series>
+                                    </kendo-chart>
+                                    <app-context-menu *ngIf="unitSalesChart != undefined" [contextOptions]="unitSalesChartContextMenuOptions" (menuSelect)="onContextMenuSelect($event)"></app-context-menu>
+	                            </div>
+	                        </div>
+	                        <div class="responsive-container grothDeclineTops">
+	                            <div style="text-align: center; font-weight: bold; font-size: 14px; height: 33%; margin-top: 5px;">Average Performance <br> <span style="color:#336699;">{{avgPercent > 0 ? "+" : ""}}{{avgPercent}}%</span></div>
+	                            <div style="text-align: center; font-weight: bold; font-size: 14px; height: 33%;">{{ACCOUNT_NAME}} Performance <br><span style="color:#336699;">{{skuName}}</span><br> <span style="color:#336699;">{{percent > 0 ? "+" : ""}}{{percent}}</span></div>
+	                            <div style="text-align: center; font-weight: bold; font-size: 14px; height:33% !important;">Over/Under Performance <br> 
+                                    <span [ngStyle]="{color: overUnderFontColor }">{{overUnderPerformance}}</span></div>
+	                        </div>
+                        </div>
+                    </jqxSplitter>
+                </div>
+                <div>
+                    <div class="responsive-container" style="border: 2px solid #c1c1c1; border-radius: 5px;">
+    	                <div style="height: 20%;">
+    	                    <div class="col-md-4" style="float: left; text-align: center;"><img src="assets/img/green.png"/></div>
+    	                    <div class="col-md-4" style="float: left; text-align: center;"><img src="assets/img/yellow.png"/></div>
+    	                    <div class="col-md-4" style="float: left; text-align: center;"><img src="assets/img/red.png"/></div>
+    	                </div> 
+    	                <div style="height:80%;">
+    	                    <div id="growthDeclineGridDiv" class="responsive-container growthDeclineGridDiv">
+    	                        <div class="grothDeclineGrids" style="height:100%;">
+    	                            <inner-loader [options]="options.showPodLoader.grid1"></inner-loader>
+    	                            <ult-grid [hidden]="options.showPodLoader.grid1.showInnerLoader" id="growthDeclineSku1Grid-{{pageUniqueKey}}" [options]="growthDeclineSku1Grid" class="{{pageUniqueKey}}_grid1 growthDeclineSku1Grid ag-fresh"></ult-grid>
+    	                        </div>
+    	                        <div class="grothDeclineGridsSpace">&nbsp;</div>
+    	                        <div class="grothDeclineGrids" style="height:100%;">
+    	                            <inner-loader [options]="options.showPodLoader.grid2"></inner-loader>
+    	                            <ult-grid [hidden]="options.showPodLoader.grid2.showInnerLoader" id="growthDeclineSku2Grid-{{pageUniqueKey}}" [options]="growthDeclineSku2Grid" class="{{pageUniqueKey}}_grid2 growthDeclineSku2Grid ag-fresh"></ult-grid>
+    	                        </div>
+    	                        <div class="grothDeclineGridsSpace">&nbsp;</div>
+    	                        <div class="grothDeclineGrids" style="height:100%;">
+    	                            <inner-loader [options]="options.showPodLoader.grid3"></inner-loader>
+    	                            <ult-grid [hidden]="options.showPodLoader.grid3.showInnerLoader" id="growthDeclineSku3Grid-{{pageUniqueKey}}" [options]="growthDeclineSku3Grid" class="{{pageUniqueKey}}_grid3 growthDeclineSku3Grid ag-fresh"></ult-grid>
+    	                        </div>
+    	                    </div>
+    	                </div> 
+    	            </div>
+                </div>
+            </jqxSplitter>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,23 @@
+<nav class="ng-scope">
+	<ul>
+		<li title='{{menuitem | splitText}}' *ngFor="let menuitem of keys;" [ngClass]="(main_page == menuitem) ? 'active' : ''">
+			<a><span class="menu-item-parent">{{menuitem | splitText}}</span></a>
+			<ul>
+				<li *ngFor="let subitem of mainmenus[menuitem];" (click)="clickOnPageItem(subitem, menuitem)" title="{{subitem.title}}" [ngClass]="(subitem.slug == page_slug) ? 'active' : ''">
+					<!--a  href="#/{{subitem.slug}}"  title="{{subitem.title}}"><span>{{subitem.title}}</span></a-->
+					<a title="{{subitem.title}}"><span>{{subitem.title}}</span></a>
+				</li>
+
+				<!--li *ngFor="let subitem of mainmenus[menuitem];" (click)="clickOnPageItem(subitem.slug, subitem.pageID, subitem.templateSlug, subitem.title)" title="{{subitem.title}}">
+					<a  href="#/{{subitem.slug}}"  title="{{subitem.title}}"><span>{{subitem.title}}</span></a>
+					<a title="{{subitem.title}}"><span>{{subitem.title}}</span></a>
+				</li-->
+			</ul>
+		</li>
+		<li title="Logout">
+			<a href="/logout.php?action=logout" target="_self" title="Logout">
+				<span class="menu-item-parent"> Logout </span>
+			</a>
+		</li>
+	</ul>
+</nav>

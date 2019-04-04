@@ -1,0 +1,48 @@
+<div id="page-{{pageID}}">
+	<section id="widget-grid-{{pageUniqueKey}}" class="{{pageUniqueKey}}_ExcelPosTrackerPage excelPosTrackerPage">
+	    <div class="row" id="{{pageUniqueKey}}SelectionFrame">
+	        <div class="col-sm-12 col-md-12 col-lg-12">
+	            <div class="measureBoxs measurePositionTop" style="margin-bottom: 0px;">
+	                <time-selection #timeselectionCall (selectionDataEvent)="setSelectionData('');" id="timeSelection" [hidden]="timeSelectionUnit == 'days' && showTimeSelection == false && isSif == true"></time-selection>
+                    <product-selection #productselectionCall (selectionDataEvent)="setSelectionData('');"
+                    id="productSelection" isShowProductFilter="isShowProductFilter"></product-selection>
+                    <market-selection #marketselectionCall  (selectionDataEvent)="setSelectionData('');" id="marketSelection"></market-selection>
+                    <!-- <measure-selection #measureselectionCall  (selectionDataEvent)="setSelectionData('');" id="measureSelection"></measure-selection>	 -->
+	                <!--<measure-selection id="measureSelection" ng-show="showMeasureSelection"></measure-selection>-->
+	                <div style="width:400px;" [hidden]="!isShowMeasureSetting" class="measureBox">
+	                    <div class="measureBox-title marginBottom">
+	                        Measure Settings
+	                    </div>
+	                    <div class="measureBox-content">
+	                        <div style="width: auto; display: inline-block; padding: 0 5px;"  *ngFor="let measureFilterObj of measureFilterSettings; let i=index">
+	                            <label><input type="checkbox" class="measureCheckbox" (change)="changeHideGridColumns(measureFilterObj,measurefil[i]);" [(ngModel)]="measurefil[i]"> {{measureFilterObj}}</label> 
+	                        </div>
+	                    </div>
+	                </div>
+	                
+	                <div [hidden]="!isShowPrivateLabel" class="measureBox measureBox6">
+                        <div class="measureBox-title marginBottom">
+                            Hide Private Label
+                        </div>
+                        <div class="measureBox-content">
+                            <input type="checkbox" [checked]="isCheckedPrivateLabel != undefined ? isCheckedPrivateLabel : true" [(ngModel)]="hidePrivateLabel" (change)="changeHidePrivateLabel()" />
+                        </div>
+                    </div>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="row podRowOne">
+	        <!-- FIRST POD STARTS -->
+	        <article class="col-sm-12 col-md-12 col-lg-12">
+	            <!-- <a style="color: green; font-size: 20px;float: right;" href="javascript:void(0);" title="Export to Excel" (click)="downloadGrid()" [hidden]="excelPosTrackerGridShowLoader.showInnerLoader" class="ng-isolate-scope"><i class="fa fa-file-excel-o chartIcon grnColor floatRight"></i></a> -->
+	            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false" style="margin:0px;">
+	                <div class="podContainer" style="padding:0px;">
+	                    <inner-loader class="loaderHelper" [options]="excelPosTrackerGridShowLoader"></inner-loader>
+	                    <ult-grid id ="grid" [hidden]="excelPosTrackerGridShowLoader.showInnerLoader" [options]="poswalmartGrid" class="{{pageUniqueKey}}_excelPosTrackerGrid ag-fresh" style="margin-bottom: 40px;"></ult-grid>
+	                </div>
+	            </div>
+	        </article>
+	    </div>
+	</section>
+
+</div>

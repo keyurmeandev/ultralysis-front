@@ -1,0 +1,114 @@
+@import "~@progress/kendo-theme-default/dist/all.css";
+/*@import '~bootstrap/dist/css/bootstrap.min.css';*/
+@import "~ag-grid/dist/styles/ag-grid.css";
+@import "~ag-grid/dist/styles/ag-theme-fresh.css";
+@import "~jqwidgets-scripts/jqwidgets/styles/jqx.base.css";
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu a::after {
+  transform: rotate(-90deg);
+  position: absolute;
+  right: 6px;
+  top: .8em;
+}
+
+.dropdown-submenu .dropdown-menu {
+  font-size:9px;
+  top: 0;
+  left: 100%;
+  margin-left: .1rem;
+  margin-right: .1rem;
+}
+
+a {font-size:15px;}
+ul { list-style-type: none;}
+.dynamic-content { marging-top: 200px;}
+
+.fullscreen {
+    z-index: 10003 !important;
+    width: 100%;
+    height: 100% !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    max-width: 100%;
+}
+.fullscreen > div {
+    position: fixed;
+    width: 100%;
+    height: 100% !important;
+}
+.chartContainer { height: 100%; }
+.fullscreen .chartContainer { height: 95%; }
+.jarviswidget div a { cursor: pointer; }
+.k-menu-popup ul, .contextMenu ul { padding: 0; margin: 0; background-color: #ebebeb; box-shadow: 0 2px 2px 0 rgba(0,0,0,0.3); }
+.k-menu-popup li.k-item, .contextMenu li { border-color: #c5c5c5; padding: .28em 1.8em .38em .9em; cursor: pointer;}
+.k-menu-popup li.k-item:hover, .contextMenu li:hover { background-image: none,-webkit-linear-gradient(top,rgba(255,255,255,.4) 0,rgba(255,255,255,.0) 100%); background-image: none,-moz-linear-gradient(top,rgba(255,255,255,.4) 0,rgba(255,255,255,.0) 100%); background-image: none,-o-linear-gradient(top,rgba(255,255,255,.4) 0,rgba(255,255,255,.0) 100%); background-image: none,linear-gradient(to bottom,rgba(255,255,255,.4) 0,rgba(255,255,255,.0) 100%); color: #2e2e2e; background-color: #bcb4b0; border-color: #bcb4b0; }
+.k-menu-popup li.k-item>.k-link, .k-menu-popup li.k-item>.k-state-active, .contextMenu li.k-item>.k-link, .contextMenu li.k-item>.k-state-active {padding:0; color: #2e2e2e !important;}
+text { fill: rgb(35, 35, 35); }
+
+/* Overtime DrillDown */
+.SelectionTextRow{
+        margin: 10px;
+        text-align: center;
+    }
+    .wrongLabelSelection:before { content: "Sorry, wrong selection! "; color:red;}
+    /*.customChartSelectionWindow .k-tabstrip .k-content.k-state-active { opacity: 1!important; display: block!important;}*/
+       
+    .selectionPartFullWidth { width: 100% !important; height: 72px !important;}
+    .gridPartFullHeight { top: 70px !important; height: 90% !important;}
+    .gridPartFullHeight .storeGrid,
+    .gridPartFullHeight .groupGrid,
+    .gridPartFullHeight .categoryGrid,
+    .gridPartFullHeight .brandGrid,
+    .gridPartFullHeight .skuGrid{ height: auto !important;}
+    
+    .footer-bredcrumb {
+        position: absolute; font-size: 12px; bottom: 20px; margin-left: 15px;
+    }
+
+    .tabClass{
+        float: left;
+        /*background: #c1c1c1;*/
+        padding: 5px;
+        height: 23px;
+        margin-top: 1px;
+    }
+    .tabClass a { color:#fff; }
+    .tabClass.active a{ color:#000;
+    }
+    ul.tabMenu li {
+        padding:0;
+    }
+    ul.tabMenu li a {
+        padding:5px 20px;
+        float: left;
+    }
+    ul.tabMenu li.active{
+        background: #fff;
+        color: #000;
+        font-weight: bold;
+    }
+    .overtimeDrilldownChartContainer { width:100%; height: 100%;}
+    .performanceChartContainer { height: 99%;}
+    .k-tabstrip .k-content.k-state-active, .k-tabstrip-items .k-state-active {  border-color: grey;}
+/* End */
+
+.jqx-splitter-nested {
+    border: 1px solid !important;
+}
+
+/* ag-grid custom css */
+.headerTop {background: #DEEBF6; white-space: nowrap; text-align: center;}
+.text-center { text-align:center;}
+.headerTop2 {background: #C6EFCE; white-space: nowrap; text-align: center;}
+.headerTop3 {background: #FFFFCC; white-space: nowrap; text-align: center;}
+.headerTop4 {background: #CEDBEF; white-space: nowrap; text-align: center;}
+.headerTop5 {background: #EEEB9C; white-space: nowrap; text-align: center;}
+.headerTop6 {background: #DAEEF3; white-space: nowrap; text-align: center;}
+.headerTop7 {background: #CCC0DA; white-space: nowrap; text-align: center;}
+.cellClass {white-space:nowrap;}
+/* End */

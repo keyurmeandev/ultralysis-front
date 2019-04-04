@@ -1,0 +1,42 @@
+<section class="customTabs">
+    <ul class="nav nav-tabs pull-left">
+        <li (click)="performanceTabClickEvent('VAR_PERCENT', 'one');" [ngClass]="options.ContextOptions.activeTab == 'one' ? 'active' : ''">
+            <a style="cursor:pointer;" data-toggle="tab" title="Variance (%)"> <img src="assets/img/varpercent.png" alt="Variance (%)"/></a>
+        </li>
+        <li (click)="performanceTabClickEvent('VARIANCE', 'two');" [ngClass]="options.ContextOptions.activeTab == 'two' ? 'active' : ''">
+            <a style="cursor:pointer;" data-toggle="tab" title="Variance"> <img src="assets/img/variance.png" alt="Variance"/></a>
+        </li>
+    </ul>
+</section>
+<inner-loader [options]="options.showPodLoader"></inner-loader>
+<no-data-found [options]="options.showPODNoDataFound"></no-data-found>
+
+<div [hidden]="options.showPodLoader.showInnerLoader == true || options.showPODNoDataFound.showNoDataFound == true || options.ContextOptions.isGrid == true" class="chartContainer">
+    <kendo-chart class="kendochartClass {{options.performanceChartGridClass}}" #performancechartObj="kendoChart"  *ngIf="performanceChart != undefined" 
+        [legend]="performanceChart.legend"
+        [title]="performanceChart.title"
+        [seriesDefaults]="performanceChart.seriesDefaults"
+        [panes]="performanceChart.panes"
+        [valueAxis]="performanceChart.valueAxis"
+        [categoryAxis]="performanceChart.categoryAxis"
+        [tooltip]="performanceChart.tooltip"
+        >
+        <kendo-chart-series>
+            <kendo-chart-series-item [data]="ChartData" field="data" categoryField="ACCOUNT">
+                <kendo-chart-series-item-tooltip>
+                    <ng-template let-dataItem="dataItem">
+                        <div style="text-align: center;">
+                            <div class='chartTooltipTitle'>{{dataItem.ACCOUNT}}</div>
+                            <div class='chartTooltipLine'>{{dataItem.TYEAR | nformatter:-1}} {{unit}} Sales</div>
+                            <div class='chartTooltipLine'><span *ngIf="dataItem.data > 0">Up</span><span *ngIf="dataItem.data < 0">Down</span> {{dataItem.data | nformatter:-1}} {{signicon}} </div>
+                        </div>
+                    </ng-template>
+                </kendo-chart-series-item-tooltip>
+          </kendo-chart-series-item>
+        </kendo-chart-series>
+    </kendo-chart>
+    <app-context-menu *ngIf="performanceChart != undefined" [contextOptions]="options.ContextOptions" (menuSelect)="onContextMenuSelect($event)"></app-context-menu>
+</div>
+<ult-grid [hidden]="options.showPodLoader.showInnerLoader == true || options.showPODNoDataFound.showNoDataFound == true || options.ContextOptions.isGrid == false" [options]="options.performanceGrid" class="performanceGridClass responsive-container ag-fresh"></ult-grid>
+
+<!-- <div context-menu options="options.ContextOptions" gridcallback="fnSetPerformanceGrid('VAR_PERCENT')" chartcallback="fnSetPerformanceChart('VAR_PERCENT')" gridcallback2="fnSetPerformanceGrid('VARIANCE')" chartcallback2="fnSetPerformanceChart('VARIANCE')" changevisiblettemscallback="fnSetVisibleItems()" ></div> -->

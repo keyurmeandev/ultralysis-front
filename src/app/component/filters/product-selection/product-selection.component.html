@@ -1,0 +1,59 @@
+<div class="measureBox measureBox6" [hidden]="!isShowProductFilter">
+    <div class="measureBox-title" (click)="setProductModuleWidth();openWindow()">
+        Product Filter
+        <span><i class="fa fa-filter"></i></span>
+    </div>
+    <div class="measureBox-content" [ngClass]="{selectedAll:selectedProductText=='All'}" >
+        <p [innerHTML]="selectedProductText" ></p>
+    </div>
+</div>
+<div id="productSelectionWindow">
+    <div class="blackOverlay" *ngIf="opened">&nbsp;</div>
+    <kendo-window title="Product Selection" *ngIf="opened" (close)="closePopup()" [(width)]="productModalWidth" [resizable]="false">
+        <div class="lockFilterScreen" [hidden]="!productFilterInnerLoader.showInnerLoader">&nbsp;</div>
+        <div style="height:12px;">
+            <div [hidden]="!productFilterInnerLoader.showInnerLoader" class="contentBar" style="float: right;">
+                <div id="block_1" class="barlittle"></div>
+                <div id="block_2" class="barlittle"></div>
+                <div id="block_3" class="barlittle"></div>
+                <div id="block_4" class="barlittle"></div>
+                <div id="block_5" class="barlittle"></div>
+            </div>
+        </div>    
+        <div class="modal-custom-body" style="font-size:12px;">
+            <ul id="product_tabs" class="nav nav-tabs">
+                <li *ngFor="let obj of productSelectionTabs; let i = index" (click)="getKeyData(obj.data, i);" [ngClass]="currentIndex == i ? 'active' : ''"><a data-toggle="tab">{{obj.label}}<span *ngIf="obj.selectedDataList.length > 0" style="padding-left:5px;"><i class="fa fa-filter"></i></span></a></li>
+            </ul>
+            <div class="tab-content ddbPd">
+                <div *ngFor="let obj of productSelectionTabs;let i = index" class="tab-pane" [ngClass]="currentIndex == i ? 'active' : ''">
+                    <section class="SFPcontainer">
+                        <div class="left_box" (click)="checkIsStickyEnabledProduct()" ><span></span>
+                            <input class="filterField" [ngModel]="FilterText" (ngModelChange)="itemFilter($event)" value="" placeholder="Filtering by {{obj.label}}">
+                            <select size="5" multiple [(ngModel)]="obj.selectedItemLeft" [disabled]="stickyFilter == 1 ? true : false" class="productFilterSelect">
+                                <option *ngFor="let objData of obj.dataList" [ngValue]="objData" (dblclick)="pushAndPopItems(obj.dataList,obj.selectedItemLeft,obj.selectedDataList, i, 'POP')">{{objData.label}}</option>
+                            </select>
+                        </div>
+                        <div class="mid_box" style="padding-top: 5%;">
+                            <input (click)="pushAndPopItems(obj.dataList,obj.selectedItemLeft,obj.selectedDataList, i, 'POP')" class="btn btn-primary btn-xs" type="button" value="&gt;&gt;" style="vertical-align: middle; height: 25px;width: 60%; margin: 50px 0 5px 0;"/>
+                            <input (click)="pushAndPopItems(obj.selectedDataList,obj.selectedItemRight,obj.dataList, i, 'PUSH')" class="btn btn-primary btn-xs" type="button" value="&lt;&lt;" style="vertical-align: middle; height: 25px;width: 60%;"/>
+                        </div>
+                        <div class="right_box" (click)="checkIsStickyEnabledProduct()"><span></span>
+                            <select size="5" multiple [(ngModel)]="obj.selectedItemRight">
+                                <option *ngFor="let objDataF of obj.selectedDataList" (dblclick)="pushAndPopItems(obj.selectedDataList,obj.selectedItemRight,obj.dataList, i, 'PUSH')" [ngValue]="objDataF">{{objDataF.label}}</option>
+                            </select>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="stickyNote" *ngIf="stickyFilter == 1">Note:- Please untick Sticky Filter to make filter changes.</div>
+        <div class="modal-custom-footer">
+            <!-- ng-true-value="1" ng-false-value="0" -->
+            <input [hidden]="!fetchProductAndMarketFilterOnTabClick" [(ngModel)]="stickyFilter"  type="checkbox" [checked]="stickyFilter == 1" style="margin-top: 1px; width: 18px; height: 18px; position: relative; top: 5px;" />
+            <label [hidden]="!fetchProductAndMarketFilterOnTabClick" style="font-weight: bold;">Sticky Filter</label>
+            <button type="button" class="btn btn-primary" (click)="setProductSelectedLabel();applyStickyFilter(productSelectionTabs);setSelectionData();close();">OK</button> 
+            <button type="button" class="btn btn-danger" (click)="cancelProductFilters();">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="productClearFilters();">Reset</button>
+        </div>
+    </kendo-window>
+</div>

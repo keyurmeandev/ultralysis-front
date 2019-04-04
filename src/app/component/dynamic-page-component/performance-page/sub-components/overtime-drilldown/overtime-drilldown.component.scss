@@ -1,0 +1,32 @@
+a { font-size:13px;}
+/*ul.tabMenu li { padding:14px;}
+ul.tabMenu li a { padding: 0px 8px;}
+.tabClass { margin-top:0px; height:25px; padding:0px;}
+.k-tabstrip>.k-content { padding: 20px 8px !important; }*/
+
+.SelectionTextRow{
+    margin: 10px;
+    text-align: center;
+}
+.wrongLabelSelection:before { content: "Sorry, wrong selection! "; color:red;}
+/*.customChartSelectionWindow .k-tabstrip .k-content.k-state-active { opacity: 1!important; display: block!important;}*/
+.selectionPartFullWidth { width: 100% !important; height: 72px !important;}
+.gridPartFullHeight { top: 70px !important; height: 90% !important;}
+.gridPartFullHeight .storeGrid,
+.gridPartFullHeight .groupGrid,
+.gridPartFullHeight .categoryGrid,
+.gridPartFullHeight .brandGrid,
+.gridPartFullHeight .skuGrid{ height: auto !important;}
+.footer-bredcrumb { position: absolute; font-size: 12px; bottom: 20px; margin-left: 15px; }
+.tabClass{ float: left; /*background: #c1c1c1;*/ padding: 5px; height: 23px; margin-top: 1px; }
+.tabClass a { color:#fff; }
+.tabClass.active a{ color:#000;}
+ul.tabMenu li { padding:0; }
+ul.tabMenu li a { padding:5px 20px; float: left; }
+ul.tabMenu li.active{ background: #fff; color: #000; font-weight: bold;}
+.overtimeDrilldownChartContainer { width:100%; height: 100%;}
+.performanceChartContainer { height: 99%;}
+.k-tabstrip .k-content.k-state-active, .k-tabstrip-items .k-state-active {  border-color: grey;}
+.jqx-widget-content .hide { display : none !important; }
+
+.measurePositionTop { top:35px !important; }

@@ -1,0 +1,37 @@
+<div id="gridDiv" class="performanceGridsContainer">
+
+    <div [hidden]="!options.gridStore" style="width:100%;float: left;" class="performance_grid_container" 
+    [ngStyle]="{width: options.singleGridWidth + '%'}">
+        <inner-loader [options]="options.showPodLoader.gridStore"></inner-loader>
+        <ult-grid id="storeGrid" [options]="options.storeGrid" class="{{options.storeGridClass}} storeGrid ag-fresh"></ult-grid>
+    </div>
+
+    <div [hidden]="!options.gridStore" style="float: left;" class="performance_grid_gap" [ngStyle]="{width: options.gridGap + '%'}" >&nbsp;</div>
+
+    <div [hidden]="!options.gridGroup" style="width:100%;float: left; " class="performance_grid_container" 
+    [ngStyle]="{width: options.singleGridWidth + '%'}">
+        <inner-loader [options]="options.showPodLoader.gridGroup"></inner-loader>
+        <ult-grid id="groupGrid" [options]="options.groupGrid" style="height: 100%;" class="{{options.groupGridClass}} groupGrid ag-fresh"></ult-grid>
+    </div>
+    <div [hidden]="!options.gridGroup" style="float: left; " class="performance_grid_gap" [ngStyle]="{width: options.gridGap + '%'}">&nbsp;</div>
+
+    <div [hidden]="!options.gridCategory" style="width:100%;float: left;" class="performance_grid_container" 
+    [ngStyle]="{width: options.singleGridWidth + '%'}">
+        <inner-loader [options]="options.showPodLoader.gridCategory"></inner-loader>
+        <ult-grid id="categoryGrid" [options]="options.categoryGrid" class="{{options.categoryGridClass}} categoryGrid ag-fresh"></ult-grid>
+    </div>
+    <div style="float: left;" class="performance_grid_gap" [ngStyle]="{width: options.gridGap + '%'}">&nbsp;</div>
+
+    <div [hidden]="!options.gridBrand" style="width:100%;float: left; " class="performance_grid_container" 
+    [ngStyle]="{width: options.singleGridWidth + '%'}">
+        <inner-loader [options]="options.showPodLoader.gridBrand"></inner-loader>
+        <ult-grid id="brandGrid" [options]="options.brandGrid" class="{{options.brandGridClass}} brandGrid ag-fresh"></ult-grid>
+    </div>
+    <div [hidden]="!options.gridBrand" style="float: left;" class="performance_grid_gap" [ngStyle]="{width: options.gridGap + '%'}">&nbsp;</div>
+
+    <div [hidden]="!options.gridSku" style="width:100%;float: left;" class="performance_grid_container" [ngStyle]="{width: options.singleGridWidth + '%'}">
+        <inner-loader [options]="options.showPodLoader.gridSKU"></inner-loader>
+        <ult-grid id="skuGrid" [options]="options.skuGrid" class="{{options.skuGridClass}} skuGrid ag-fresh"></ult-grid>
+    </div>
+
+</div>

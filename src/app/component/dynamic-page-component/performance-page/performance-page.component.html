@@ -1,0 +1,61 @@
+<div id="page-{{pageID}}">
+    <section id="widget-grid-{{pageUniqueKey}}" class="{{pageUniqueKey}}_PerformancePage">  
+        <a class="btn btn-primary btn-xs layoutChangingBtn" title="Change Layout" (click)='performancePageChangeLayout();'>
+            <i class="fa fa-gear" style="color:white;"></i>
+        </a>
+        <jqxSplitter #splitContainer width="100%" height="{{pageHeight}}" [orientation]="'horizontal'" [panels]="[{ size: '65%' }, { size: '35%' }]" id="{{pageUniqueKey}}_splitContainer">
+            <div class="selectionAndChartPart">
+                <jqxSplitter #firstNested width="100%" height="100%" [panels]="[{ size: '20%' }]" [orientation]="'vertical'" id="{{pageUniqueKey}}_splitter" class="splitter">
+                    <div class="selectionPart">
+                        <div id="{{pageUniqueKey}}FilterContainer">
+                            <div [ngClass]="measurePositionClass" class="measureBoxs">
+                                <time-selection #timeselectionCall (selectionDataEvent)="setSelectionData('');" id="timeSelection" [hidden]="timeSelectionUnit == 'days' && showTimeSelection == false && isSif == true"></time-selection>
+                                <product-selection #productselectionCall (selectionDataEvent)="setSelectionData('');"
+                                id="productSelection" isShowProductFilter="isShowProductFilter"></product-selection>
+                                <market-selection #marketselectionCall  (selectionDataEvent)="setSelectionData('');" id="marketSelection"></market-selection>
+                                <measure-selection #measureselectionCall  (selectionDataEvent)="setSelectionData('');" id="measureSelection"></measure-selection>
+                                <div class="measureBox measureBox6">
+                                    <div class="measureBox-title marginBottom">
+                                        Hide Private Label
+                                    </div>
+                                    <div class="measureBox-content">
+                                        <input type="checkbox" [checked]="isCheckedPrivateLabel != undefined ? isCheckedPrivateLabel : true" [(ngModel)]="hidePrivateLabel" (change)="changeHidePrivateLabel()" />
+                                    </div>
+                                </div>
+                                <div [hidden]="!ShowFieldSelection" class="measureBox measureBox6">
+                                    <div class="measureBox-title marginBottom">
+                                        Field Selection
+                                    </div>
+                                    <div class="measureBox-content">
+                                        <select [(ngModel)]="selectedField" class="col-sm-12" (change)="filterFirstGrid()"> 
+                                            <option value="">Select Field</option>
+                                            <option *ngFor="let obj of fieldSelection" [ngValue]="obj">{{obj.label}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chartPart col-xs-12 col-sm-12" style="height: 100%;width: 80%;">
+                        <div class="jarviswidget jarviswidget-color-blueDark POD_THREE" id="wid-id-0-{{pageUniqueKey}}" data-widget-editbutton="false" style="height: 100%;width: 100%">
+                            <header id="{{pageUniqueKey}}DrillDownChartDiv hidden-xs hidden-sm" class="treeMapHead" role="heading">
+                                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                <h2>Drill Down / Over Time Chart</h2>
+                            </header>
+                            <div class="responsive-container">
+                                <inner-loader class="absolute_podLoader" [options]="overtimeDrilldownChartOptions.showPodLoader" ></inner-loader>
+                                
+                                <div [hidden]="overtimeDrilldownChartOptions.showPodLoader.customError != ''" class="overtimeDrildownContainer widget-body no-padding responsive-container" >
+                                    <overtime-drilldown [options]="overtimeDrilldownChartOptions" (tabSelectionEvent)="getChartTabData();"></overtime-drilldown> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </jqxSplitter>
+            </div>
+            <div class="gridPart rlSalesDown">
+                <performance-grid  [options]="performanceGridOptions"></performance-grid>
+            </div>
+        </jqxSplitter>
+    </section>
+</div>
